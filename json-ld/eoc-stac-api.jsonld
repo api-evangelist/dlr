@@ -1,0 +1,157 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "dlr": "https://geoservice.dlr.de/eoc/ogc/stac/v1/",
+    "stac": "https://stacspec.org/",
+    "ogc": "http://www.opengis.net/def/",
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "geojson": "https://purl.org/geojson/vocab#",
+
+    "EOCSTACApi": "dlr:EOCSTACApi",
+    "Collection": "stac:Collection",
+    "Item": "stac:Item",
+    "ItemCollection": "stac:ItemCollection",
+
+    "id": "@id",
+    "type": "@type",
+    "title": "dcterms:title",
+    "description": "dcterms:description",
+    "license": "dcterms:license",
+    "datetime": {
+      "@id": "dcterms:date",
+      "@type": "xsd:dateTime"
+    },
+    "created": {
+      "@id": "dcterms:created",
+      "@type": "xsd:dateTime"
+    },
+    "updated": {
+      "@id": "dcterms:modified",
+      "@type": "xsd:dateTime"
+    },
+    "start_datetime": {
+      "@id": "dcat:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "end_datetime": {
+      "@id": "dcat:endDate",
+      "@type": "xsd:dateTime"
+    },
+    "bbox": {
+      "@id": "dcat:bbox",
+      "@container": "@list"
+    },
+    "geometry": "geojson:geometry",
+    "coordinates": "geojson:coordinates",
+    "links": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "href": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "rel": "schema:additionalType",
+    "assets": "dcat:distribution",
+    "stac_version": "stac:version",
+    "stac_extensions": "stac:extensions",
+    "collection": "stac:collection",
+    "platform": "schema:vehicle",
+    "instruments": "schema:instrument",
+    "constellation": "schema:name",
+    "mission": "schema:name",
+    "gsd": {
+      "@id": "schema:value",
+      "@type": "xsd:decimal"
+    },
+    "collections": {
+      "@id": "stac:collections",
+      "@container": "@set"
+    },
+    "numberMatched": {
+      "@id": "schema:numberOfItems",
+      "@type": "xsd:integer"
+    },
+    "numberReturned": {
+      "@id": "schema:numberOfItems",
+      "@type": "xsd:integer"
+    },
+    "features": {
+      "@id": "geojson:features",
+      "@container": "@set"
+    },
+    "extent": {
+      "@id": "dcterms:spatial"
+    },
+    "spatial": {
+      "@id": "dcterms:spatial"
+    },
+    "temporal": {
+      "@id": "dcterms:temporal"
+    },
+    "interval": {
+      "@id": "dcat:temporalResolution",
+      "@container": "@list"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "dlr:EOCSTACApi",
+      "@type": "schema:WebAPI",
+      "schema:name": "DLR EOC EO Products Service",
+      "schema:description": "Provides interoperable access to metadata from EO collections and products of DLR's Earth Observation Center (EOC) via STAC API 1.0.0.",
+      "schema:url": "https://geoservice.dlr.de/eoc/ogc/stac/v1",
+      "schema:version": "1.0.0",
+      "schema:provider": {
+        "@type": "schema:Organization",
+        "schema:name": "DLR Earth Observation Center (EOC)",
+        "schema:url": "https://www.dlr.de/en/eoc/",
+        "schema:email": "geoservice@dlr.de"
+      },
+      "schema:encodingFormat": "application/json",
+      "schema:documentation": "https://geoservice.dlr.de/web/about",
+      "schema:license": "https://eoweb.dlr.de/egp/resources/context/Login",
+      "schema:keywords": [
+        "Earth Observation",
+        "Remote Sensing",
+        "STAC",
+        "OGC",
+        "Satellite Data",
+        "Geospatial",
+        "DLR",
+        "EOC",
+        "TanDEM-X",
+        "TerraSAR-X",
+        "EnMAP",
+        "Sentinel"
+      ],
+      "schema:endpointURL": [
+        {
+          "@type": "schema:EntryPoint",
+          "schema:url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/",
+          "schema:description": "Landing page"
+        },
+        {
+          "@type": "schema:EntryPoint",
+          "schema:url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections",
+          "schema:description": "List of available EO collections"
+        },
+        {
+          "@type": "schema:EntryPoint",
+          "schema:url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/search",
+          "schema:description": "STAC item search with filtering, sorting, and field projection"
+        },
+        {
+          "@type": "schema:EntryPoint",
+          "schema:url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/conformance",
+          "schema:description": "OGC API conformance classes"
+        }
+      ]
+    }
+  ]
+}

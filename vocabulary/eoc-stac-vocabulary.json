@@ -1,0 +1,117 @@
+{
+  "title": "DLR EOC STAC API Vocabulary",
+  "description": "Domain vocabulary for the DLR Earth Observation Center STAC API, covering key terms used in Earth observation data access via the OGC/STAC ecosystem.",
+  "source": "https://geoservice.dlr.de/eoc/ogc/stac/v1",
+  "terms": [
+    {
+      "term": "STAC",
+      "definition": "SpatioTemporal Asset Catalog — a specification for describing geospatial information enabling search, discovery, and access to Earth observation data.",
+      "url": "https://stacspec.org/"
+    },
+    {
+      "term": "Collection",
+      "definition": "A logical grouping of Earth observation data items sharing common metadata, spatial/temporal extents, and licensing. Examples: TDM90 (TanDEM-X DEM), S5P_TROPOMI_L2_NO2.",
+      "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections"
+    },
+    {
+      "term": "Item",
+      "definition": "A GeoJSON Feature representing a single Earth observation scene or product tile with STAC metadata including datetime, geometry, assets, and provenance.",
+      "url": "https://stacspec.org/spec/item.html"
+    },
+    {
+      "term": "Asset",
+      "definition": "A link to an actual data file or resource associated with a STAC Item (e.g., image files, metadata XMLs, thumbnails), described by href, type, title, and roles.",
+      "url": "https://stacspec.org/spec/item.html#assets"
+    },
+    {
+      "term": "EOC",
+      "definition": "Earth Observation Center — the DLR department that operates the geoservice.dlr.de platform, managing satellite data from missions including TanDEM-X, TerraSAR-X, EnMAP, DESIS, and Sentinel.",
+      "url": "https://www.dlr.de/en/eoc/"
+    },
+    {
+      "term": "TanDEM-X",
+      "definition": "Twin Radar in Tandem — a DLR satellite mission producing a global, high-resolution digital elevation model (TDM90, 90m; TDM30, 30m) via bistatic SAR interferometry.",
+      "url": "https://www.dlr.de/en/eoc/research-transfer/topics/satellite-data/tandem-x"
+    },
+    {
+      "term": "TerraSAR-X",
+      "definition": "A German SAR (Synthetic Aperture Radar) satellite operated by DLR providing high-resolution X-band radar imagery for scientific and commercial applications.",
+      "url": "https://www.dlr.de/de/forschung-und-transfer/projekte-und-missionen/terrasar-x"
+    },
+    {
+      "term": "EnMAP",
+      "definition": "Environmental Mapping and Analysis Program — a DLR hyperspectral satellite providing 230-band spectral data for ecosystem and environmental monitoring.",
+      "url": "https://www.enmap.org/"
+    },
+    {
+      "term": "DESIS",
+      "definition": "DLR Earth Sensing Imaging Spectrometer — a hyperspectral sensor aboard the ISS providing 235 spectral bands from 400-1000 nm.",
+      "url": "https://www.dlr.de/en/eoc/research-transfer/topics/satellite-data/desis"
+    },
+    {
+      "term": "TROPOMI",
+      "definition": "TROPOspheric Monitoring Instrument — the main instrument on Sentinel-5P, providing atmospheric trace gas measurements including NO2, O3, SO2, CH4, and CO.",
+      "url": "https://www.tropomi.eu/"
+    },
+    {
+      "term": "WMS",
+      "definition": "OGC Web Map Service — a standard protocol for serving georeferenced map images over the internet, used by DLR for visualizing EO products.",
+      "url": "https://www.ogc.org/standard/wms/"
+    },
+    {
+      "term": "WCS",
+      "definition": "OGC Web Coverage Service — a standard for accessing raw geospatial coverage data (raster grids) in scientific formats, used by DLR for programmatic data download.",
+      "url": "https://www.ogc.org/standard/wcs/"
+    },
+    {
+      "term": "WMTS",
+      "definition": "OGC Web Map Tile Service — a tile-based map serving standard optimized for web performance and caching.",
+      "url": "https://www.ogc.org/standard/wmts/"
+    },
+    {
+      "term": "bbox",
+      "definition": "Bounding box — a rectangular spatial filter defined as [minLon, minLat, maxLon, maxLat] in WGS84 (EPSG:4326) coordinates used to limit search results to a geographic area.",
+      "url": "https://stacspec.org/spec/api/1.0.0/ogcapi-features.html#tag/OGC-API-Features/operation/getItems"
+    },
+    {
+      "term": "datetime",
+      "definition": "ISO 8601 date-time string or interval (e.g., '2023-01-01T00:00:00Z/2023-12-31T23:59:59Z') used to filter STAC items by acquisition time.",
+      "url": "https://stacspec.org/spec/api/1.0.0/item-search.html#datetime"
+    },
+    {
+      "term": "CQL2",
+      "definition": "Common Query Language 2 — an OGC standard for filter expressions enabling complex attribute-based filtering of geospatial features, supported by the DLR STAC API via /filter-capabilities.",
+      "url": "https://docs.ogc.org/is/21-065r2/21-065r2.html"
+    },
+    {
+      "term": "Queryables",
+      "definition": "The set of item properties that can be used in filter expressions for a given collection, described via the /queryables endpoint.",
+      "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/queryables"
+    },
+    {
+      "term": "Sortables",
+      "definition": "The set of item properties by which search results can be sorted, described via the /sortables endpoint, supporting asc/desc direction.",
+      "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/sortables"
+    },
+    {
+      "term": "gsd",
+      "definition": "Ground Sample Distance — the spatial resolution of a satellite image in meters, representing the size of one pixel on the ground.",
+      "url": "https://stacspec.org/spec/extensions/eo/"
+    },
+    {
+      "term": "DEM",
+      "definition": "Digital Elevation Model — a 3D representation of terrain elevation values stored as a raster grid; DLR produces the TanDEM-X DEM at 12m, 30m, and 90m resolutions.",
+      "url": "https://www.dlr.de/en/eoc/research-transfer/topics/satellite-data/tandem-x"
+    },
+    {
+      "term": "World Settlement Footprint",
+      "definition": "A DLR-derived global dataset mapping human settlements at 10m resolution, available via the EOC Land WMS and STAC catalog.",
+      "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections"
+    },
+    {
+      "term": "EOWEB GeoPortal",
+      "definition": "DLR's web portal for Earth observation data access (https://eoweb.dlr.de/egp/), supporting browse, order, and WCS download for registered users.",
+      "url": "https://eoweb.dlr.de/egp/"
+    }
+  ]
+}

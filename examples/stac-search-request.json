@@ -1,0 +1,103 @@
+{
+  "description": "Example STAC API POST /search request for DLR EOC Geoservice — search Sentinel-5P TROPOMI NO2 data over Europe for a specific time window",
+  "method": "POST",
+  "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/search",
+  "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/geo+json"
+  },
+  "body": {
+    "collections": ["S5P_TROPOMI_L2_NO2"],
+    "bbox": [-10.0, 35.0, 30.0, 70.0],
+    "datetime": "2023-06-01T00:00:00Z/2023-06-30T23:59:59Z",
+    "limit": 10,
+    "sortby": [
+      {
+        "field": "properties.datetime",
+        "direction": "desc"
+      }
+    ],
+    "fields": {
+      "include": [
+        "id",
+        "geometry",
+        "bbox",
+        "properties.datetime",
+        "properties.platform",
+        "properties.instruments",
+        "assets"
+      ],
+      "exclude": []
+    }
+  },
+  "example_response": {
+    "type": "FeatureCollection",
+    "stac_version": "1.0.0",
+    "context": {
+      "returned": 10,
+      "matched": 47,
+      "limit": 10
+    },
+    "features": [
+      {
+        "type": "Feature",
+        "stac_version": "1.0.0",
+        "id": "S5P_TROPOMI_L2_NO2_20230630T120000",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-10.0, 35.0],
+              [30.0, 35.0],
+              [30.0, 70.0],
+              [-10.0, 70.0],
+              [-10.0, 35.0]
+            ]
+          ]
+        },
+        "bbox": [-10.0, 35.0, 30.0, 70.0],
+        "properties": {
+          "datetime": "2023-06-30T12:00:00Z",
+          "platform": "Sentinel-5P",
+          "instruments": ["TROPOMI"],
+          "constellation": "Copernicus"
+        },
+        "links": [
+          {
+            "rel": "self",
+            "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/S5P_TROPOMI_L2_NO2/items/S5P_TROPOMI_L2_NO2_20230630T120000"
+          },
+          {
+            "rel": "collection",
+            "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/S5P_TROPOMI_L2_NO2"
+          }
+        ],
+        "assets": {
+          "data": {
+            "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/S5P_TROPOMI_L2_NO2/items/S5P_TROPOMI_L2_NO2_20230630T120000/data",
+            "type": "application/x-netcdf",
+            "title": "NO2 Level-2 Product",
+            "roles": ["data"]
+          },
+          "thumbnail": {
+            "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/S5P_TROPOMI_L2_NO2/items/S5P_TROPOMI_L2_NO2_20230630T120000/thumbnail",
+            "type": "image/png",
+            "title": "Thumbnail",
+            "roles": ["thumbnail"]
+          }
+        },
+        "collection": "S5P_TROPOMI_L2_NO2"
+      }
+    ],
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/search"
+      },
+      {
+        "rel": "next",
+        "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/search?token=eyJsaW1pdCI6MTAsInBhZ2UiOjJ9"
+      }
+    ]
+  }
+}

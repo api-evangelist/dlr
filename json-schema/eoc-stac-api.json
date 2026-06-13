@@ -1,0 +1,247 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/dlr/refs/heads/main/json-schema/eoc-stac-api.json",
+  "title": "DLR EOC STAC API Schema",
+  "description": "JSON Schema for the DLR Earth Observation Center STAC API, covering collections, items, and search requests.",
+  "definitions": {
+    "link": {
+      "type": "object",
+      "required": ["href"],
+      "properties": {
+        "href": { "type": "string", "format": "uri" },
+        "rel": { "type": "string" },
+        "type": { "type": "string" },
+        "title": { "type": "string" },
+        "hreflang": { "type": "string" }
+      }
+    },
+    "extent": {
+      "type": "object",
+      "properties": {
+        "spatial": {
+          "type": "object",
+          "properties": {
+            "bbox": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": { "type": "number" },
+                "minItems": 4,
+                "maxItems": 6
+              }
+            }
+          }
+        },
+        "temporal": {
+          "type": "object",
+          "properties": {
+            "interval": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": { "type": ["string", "null"] },
+                "minItems": 2,
+                "maxItems": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    "collection": {
+      "type": "object",
+      "required": ["id", "links", "extent", "license"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "license": { "type": "string" },
+        "extent": { "$ref": "#/definitions/extent" },
+        "links": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/link" }
+        },
+        "stac_version": { "type": "string" },
+        "stac_extensions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "required": ["type", "stac_version", "id", "links", "assets", "geometry", "bbox", "properties"],
+      "properties": {
+        "type": { "type": "string", "enum": ["Feature"] },
+        "stac_version": { "type": "string" },
+        "stac_extensions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "id": { "type": "string" },
+        "geometry": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/definitions/geometryGeoJSON" }
+          ]
+        },
+        "bbox": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 4,
+          "maxItems": 6
+        },
+        "properties": {
+          "type": "object",
+          "required": ["datetime"],
+          "properties": {
+            "datetime": { "type": ["string", "null"], "format": "date-time" },
+            "created": { "type": "string", "format": "date-time" },
+            "updated": { "type": "string", "format": "date-time" },
+            "start_datetime": { "type": "string", "format": "date-time" },
+            "end_datetime": { "type": "string", "format": "date-time" },
+            "platform": { "type": "string" },
+            "instruments": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "constellation": { "type": "string" },
+            "mission": { "type": "string" },
+            "gsd": { "type": "number" }
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/link" }
+        },
+        "assets": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["href"],
+            "properties": {
+              "href": { "type": "string", "format": "uri" },
+              "title": { "type": "string" },
+              "description": { "type": "string" },
+              "type": { "type": "string" },
+              "roles": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "collection": { "type": "string" }
+      }
+    },
+    "geometryGeoJSON": {
+      "oneOf": [
+        { "$ref": "#/definitions/pointGeoJSON" },
+        { "$ref": "#/definitions/linestringGeoJSON" },
+        { "$ref": "#/definitions/polygonGeoJSON" },
+        { "$ref": "#/definitions/multipointGeoJSON" },
+        { "$ref": "#/definitions/multilinestringGeoJSON" },
+        { "$ref": "#/definitions/multipolygonGeoJSON" },
+        { "$ref": "#/definitions/geometrycollectionGeoJSON" }
+      ]
+    },
+    "pointGeoJSON": {
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": { "type": "string", "enum": ["Point"] },
+        "coordinates": { "type": "array", "minItems": 2, "items": { "type": "number" } }
+      }
+    },
+    "linestringGeoJSON": {
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": { "type": "string", "enum": ["LineString"] },
+        "coordinates": { "type": "array", "minItems": 2, "items": { "type": "array", "minItems": 2, "items": { "type": "number" } } }
+      }
+    },
+    "polygonGeoJSON": {
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": { "type": "string", "enum": ["Polygon"] },
+        "coordinates": { "type": "array", "items": { "type": "array", "minItems": 4, "items": { "type": "array", "minItems": 2, "items": { "type": "number" } } } }
+      }
+    },
+    "multipointGeoJSON": {
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": { "type": "string", "enum": ["MultiPoint"] },
+        "coordinates": { "type": "array", "items": { "type": "array", "minItems": 2, "items": { "type": "number" } } }
+      }
+    },
+    "multilinestringGeoJSON": {
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": { "type": "string", "enum": ["MultiLineString"] },
+        "coordinates": { "type": "array", "items": { "type": "array", "minItems": 2, "items": { "type": "array", "minItems": 2, "items": { "type": "number" } } } }
+      }
+    },
+    "multipolygonGeoJSON": {
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": { "type": "string", "enum": ["MultiPolygon"] },
+        "coordinates": { "type": "array", "items": { "type": "array", "items": { "type": "array", "minItems": 4, "items": { "type": "array", "minItems": 2, "items": { "type": "number" } } } } }
+      }
+    },
+    "geometrycollectionGeoJSON": {
+      "type": "object",
+      "required": ["type", "geometries"],
+      "properties": {
+        "type": { "type": "string", "enum": ["GeometryCollection"] },
+        "geometries": { "type": "array", "items": { "$ref": "#/definitions/geometryGeoJSON" } }
+      }
+    },
+    "searchBody": {
+      "type": "object",
+      "properties": {
+        "bbox": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 4,
+          "maxItems": 6
+        },
+        "datetime": { "type": "string" },
+        "intersects": { "$ref": "#/definitions/geometryGeoJSON" },
+        "ids": { "type": "array", "items": { "type": "string" } },
+        "collections": { "type": "array", "items": { "type": "string" } },
+        "limit": { "type": "integer", "minimum": 1, "maximum": 10000 },
+        "fields": {
+          "type": "object",
+          "properties": {
+            "include": { "type": "array", "items": { "type": "string" } },
+            "exclude": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "sortby": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["field", "direction"],
+            "properties": {
+              "field": { "type": "string" },
+              "direction": { "type": "string", "enum": ["asc", "desc"] }
+            }
+          }
+        },
+        "filter": { "type": "object" },
+        "filter-lang": { "type": "string" }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "collection": { "$ref": "#/definitions/collection" },
+    "item": { "$ref": "#/definitions/item" },
+    "searchBody": { "$ref": "#/definitions/searchBody" }
+  }
+}

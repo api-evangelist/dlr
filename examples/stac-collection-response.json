@@ -1,0 +1,63 @@
+{
+  "description": "Example response from GET /collections/{collectionId} for the TanDEM-X 90m DEM collection",
+  "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/TDM90",
+  "response": {
+    "type": "Collection",
+    "id": "TDM90",
+    "stac_version": "1.0.0",
+    "stac_extensions": [],
+    "title": "TanDEM-X 90m Digital Elevation Model",
+    "description": "The TanDEM-X 90m DEM is a global digital elevation model with a horizontal resolution of 3 arc seconds (~90m at the equator), derived from the TanDEM-X mission. It represents the world's most precise global digital elevation model.",
+    "license": "proprietary",
+    "extent": {
+      "spatial": {
+        "bbox": [
+          [-180.0, -90.0, 180.0, 90.0]
+        ]
+      },
+      "temporal": {
+        "interval": [
+          ["2010-12-01T00:00:00Z", "2015-01-31T00:00:00Z"]
+        ]
+      }
+    },
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/TDM90",
+        "type": "application/json"
+      },
+      {
+        "rel": "root",
+        "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1",
+        "type": "application/json"
+      },
+      {
+        "rel": "items",
+        "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/TDM90/items",
+        "type": "application/geo+json"
+      },
+      {
+        "rel": "queryables",
+        "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/TDM90/queryables",
+        "type": "application/schema+json"
+      }
+    ],
+    "providers": [
+      {
+        "name": "DLR Earth Observation Center",
+        "description": "German Aerospace Center, Earth Observation Center",
+        "roles": ["producer", "host"],
+        "url": "https://www.dlr.de/en/eoc/"
+      }
+    ],
+    "keywords": [
+      "DEM",
+      "Digital Elevation Model",
+      "TanDEM-X",
+      "Radar",
+      "Global",
+      "Topography"
+    ]
+  }
+}
