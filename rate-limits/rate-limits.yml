@@ -1,0 +1,49 @@
+rateLimits:
+
+  - name: EOC Geoservice OGC Services
+    description: DLR does not publish explicit rate limits for its EOC Geoservice
+      OGC-compliant endpoints (WMS, WCS, CSW, STAC). As a public scientific data
+      service operated by a government research institution, access is provided on
+      a best-effort basis. Users are expected to follow responsible use practices
+      and avoid excessive automated requests that could impact service availability
+      for other users.
+    url: https://geoservice.dlr.de/web/about
+    limits:
+      - name: Published Rate Limit
+        value: Not specified
+        notes: No published rate limits. Service intended for scientific and research
+          use with responsible access practices expected.
+
+  - name: STAC API
+    description: The EOC STAC API at geoservice.dlr.de/eoc/ogc/stac/v1 provides
+      access to metadata across 80+ Earth observation collections. No explicit rate
+      limits are documented. Standard OGC service fair use policies apply.
+    url: https://geoservice.dlr.de/eoc/ogc/stac/v1/
+    limits:
+      - name: Requests Per Period
+        value: Not specified
+        notes: No published rate limits for the STAC API. Contact geoservice@dlr.de
+          for high-volume access needs.
+
+  - name: EOWEB GeoPortal
+    description: The EOWEB GeoPortal does not publish explicit rate limits for
+      registered user access. Dataset ordering through WCS may be subject to
+      institutional download quotas or dataset-specific license restrictions.
+    url: https://eoweb.dlr.de/egp/
+    limits:
+      - name: Download Quota
+        value: Not specified
+        notes: Download limits may apply per dataset license terms. Contact DLR
+          EOC for commercial or high-volume use cases.
+
+  - name: WDC-RSAT
+    description: The World Data Center for Remote Sensing of the Atmosphere does
+      not publish explicit API rate limits. As a public scientific data center
+      operating under ICSU auspices, responsible use for scientific purposes
+      is expected.
+    url: https://wdc.dlr.de
+    limits:
+      - name: Published Rate Limit
+        value: Not specified
+        notes: No published rate limits. Service is intended for scientific research
+          and educational use.

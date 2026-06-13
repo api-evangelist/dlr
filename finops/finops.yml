@@ -1,0 +1,69 @@
+finops:
+
+  summary: DLR Earth Observation Center APIs are provided as free public scientific
+    services funded by the German federal government and the states of Germany. All
+    OGC-compliant services (WMS, WCS, CSW, STAC, WMTS) are available at no cost.
+    The EOWEB GeoPortal provides free registered access to DLR's Earth observation
+    data holdings. Proposal-based access to TanDEM-X and TerraSAR-X scientific data
+    is free for approved research projects. No commercial pricing tiers are published.
+    Costs for commercial satellite tasking orders (TerraSAR-X, etc.) would be negotiated
+    directly with DLR's commercial arm (Airbus Defence and Space for TerraSAR-X).
+
+  pricing:
+    model: Free public service / Government-funded
+    currency: EUR
+    commercial: false
+    notes: All EOC Geoservice APIs are free at point of use. DLR is a public research
+      institution funded by the German government. Commercial use of derived products
+      may be subject to license terms.
+
+  costs:
+
+    - service: EOC Geoservice (WMS/WCS/CSW/STAC)
+      cost: 0.00
+      currency: EUR
+      unit: request
+      notes: Fully open access, no cost per request or data volume. Free for all users.
+
+    - service: EOWEB GeoPortal (Guest)
+      cost: 0.00
+      currency: EUR
+      unit: month
+      notes: Free guest browsing access with no registration required.
+
+    - service: EOWEB GeoPortal (Registered)
+      cost: 0.00
+      currency: EUR
+      unit: month
+      notes: Free registration provides dataset ordering and download access. Some
+        datasets require accepting specific license terms.
+
+    - service: WDC-RSAT Atmospheric Data
+      cost: 0.00
+      currency: EUR
+      unit: dataset
+      notes: Free public access to atmospheric remote sensing data. Scientific
+        use encouraged; registration may be required for some datasets.
+
+    - service: TanDEM-X Science System
+      cost: 0.00
+      currency: EUR
+      unit: project
+      notes: Free for approved scientific research proposals. Competitive allocation
+        process with expert review. Not available for commercial use.
+
+    - service: TerraSAR-X Science System
+      cost: 0.00
+      currency: EUR
+      unit: project
+      notes: Free for approved scientific research proposals. Competitive allocation
+        process. Commercial TerraSAR-X tasking requires separate commercial contract.
+
+  contacts:
+    - type: General Geoservice
+      email: geoservice@dlr.de
+      url: https://geoservice.dlr.de/web/about
+    - type: Earth Observation Center
+      url: https://www.dlr.de/en/eoc/research-transfer/services
+    - type: Data Access Information
+      url: https://www.dlr.de/en/eoc/research-transfer/topics/satellite-data/data-access

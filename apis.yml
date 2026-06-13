@@ -1,0 +1,239 @@
+name: DLR
+description: The German Aerospace Center (DLR) Earth Observation Center (EOC) provides
+  public APIs for accessing Earth observation satellite data, remote sensing products,
+  and scientific datasets from German aerospace research missions. Services include
+  OGC-compliant WMS, WCS, CSW, STAC, and WMTS endpoints covering atmospheric trace
+  gases, digital elevation models, land cover, hyperspectral imagery, water resources,
+  and more from missions such as TanDEM-X, TerraSAR-X, EnMAP, DESIS, and Sentinel
+  series.
+image: https://www.dlr.de/favicon.ico
+tags:
+  - Earth Observation
+  - Remote Sensing
+  - Satellite Data
+  - Geospatial
+  - Aerospace
+  - Open Data
+  - OGC
+  - STAC
+  - Atmospheric Science
+  - Digital Elevation Models
+created: '2026-06-13'
+modified: '2026-06-13'
+url: https://raw.githubusercontent.com/api-evangelist/dlr/refs/heads/main/apis.yml
+specificationVersion: '0.19'
+apis:
+
+  - name: EOC Geoservice STAC API
+    description: SpatioTemporal Asset Catalog (STAC) 1.0.0 API providing interoperable
+      access to metadata from 80+ Earth observation collections and products from
+      DLR's Earth Observation Center, covering atmospheric, optical, radar, land, water,
+      and elevation datasets.
+    image: https://www.dlr.de/favicon.ico
+    humanURL: https://geoservice.dlr.de/web/about
+    baseURL: https://geoservice.dlr.de/eoc/ogc/stac/v1
+    tags:
+      - STAC
+      - Earth Observation
+      - Satellite Data
+      - Geospatial
+      - OGC
+    properties:
+      - type: Documentation
+        url: https://geoservice.dlr.de/web/about
+      - type: OpenAPI
+        url: https://geoservice.dlr.de/eoc/ogc/stac/v1/openapi
+      - type: Conformance
+        url: https://geoservice.dlr.de/eoc/ogc/stac/v1/conformance
+      - type: Collections
+        url: https://geoservice.dlr.de/eoc/ogc/stac/v1/collections
+      - type: Search
+        url: https://geoservice.dlr.de/eoc/ogc/stac/v1/search
+    contact:
+      - FN: Geoservice Manager
+        email: geoservice@dlr.de
+
+  - name: EOC Imagery Web Map Service (WMS)
+    description: OGC Web Map Service providing visualization layers for DLR Earth
+      observation imagery products including optical satellite data, hyperspectral
+      imagery, and derived remote sensing products.
+    image: https://www.dlr.de/favicon.ico
+    humanURL: https://geoservice.dlr.de/web/
+    baseURL: https://geoservice.dlr.de/eoc/imagery/wms
+    tags:
+      - WMS
+      - Earth Observation
+      - Imagery
+      - OGC
+      - Geospatial
+    properties:
+      - type: Documentation
+        url: https://geoservice.dlr.de/web/about
+      - type: GetCapabilities
+        url: https://geoservice.dlr.de/eoc/imagery/wms?SERVICE=WMS&REQUEST=GetCapabilities
+    contact:
+      - FN: Geoservice Manager
+        email: geoservice@dlr.de
+
+  - name: EOC Imagery Web Coverage Service (WCS)
+    description: OGC Web Coverage Service providing direct download and extraction of
+      coverage data for DLR Earth observation imagery products, supporting data subsetting
+      and retrieval in scientific formats.
+    image: https://www.dlr.de/favicon.ico
+    humanURL: https://geoservice.dlr.de/web/
+    baseURL: https://geoservice.dlr.de/eoc/imagery/wcs
+    tags:
+      - WCS
+      - Earth Observation
+      - Data Download
+      - OGC
+      - Geospatial
+    properties:
+      - type: Documentation
+        url: https://geoservice.dlr.de/web/about
+      - type: GetCapabilities
+        url: https://geoservice.dlr.de/eoc/imagery/wcs?SERVICE=WCS&REQUEST=GetCapabilities
+    contact:
+      - FN: Geoservice Manager
+        email: geoservice@dlr.de
+
+  - name: EOC Basemap Web Map Service (WMS)
+    description: OGC Web Map Service providing basemap and core geospatial reference
+      layers from DLR including global mosaics and topographic reference data derived
+      from DLR satellite missions.
+    image: https://www.dlr.de/favicon.ico
+    humanURL: https://geoservice.dlr.de/web/
+    baseURL: https://geoservice.dlr.de/eoc/basemap/wms
+    tags:
+      - WMS
+      - Basemap
+      - OGC
+      - Geospatial
+      - Reference Data
+    properties:
+      - type: Documentation
+        url: https://geoservice.dlr.de/web/about
+      - type: GetCapabilities
+        url: https://geoservice.dlr.de/eoc/basemap/wms?SERVICE=WMS&REQUEST=GetCapabilities
+    contact:
+      - FN: Geoservice Manager
+        email: geoservice@dlr.de
+
+  - name: EOC Basemap Web Coverage Service (WCS)
+    description: OGC Web Coverage Service for DLR basemap and reference datasets
+      including the SRTM X-SAR global digital elevation model mosaic, providing
+      programmatic access to raw coverage data.
+    image: https://www.dlr.de/favicon.ico
+    humanURL: https://geoservice.dlr.de/web/
+    baseURL: https://geoservice.dlr.de/eoc/basemap/wcs
+    tags:
+      - WCS
+      - Basemap
+      - DEM
+      - OGC
+      - Geospatial
+    properties:
+      - type: Documentation
+        url: https://geoservice.dlr.de/web/about
+      - type: GetCapabilities
+        url: https://geoservice.dlr.de/eoc/basemap/wcs?SERVICE=WCS&REQUEST=GetCapabilities
+    contact:
+      - FN: Geoservice Manager
+        email: geoservice@dlr.de
+
+  - name: EOC Land Web Map Service (WMS)
+    description: OGC Web Map Service providing land cover and land use visualization
+      layers from DLR research, including World Settlement Footprint, crop type mapping,
+      forest structure, CORINE land cover, and urbanization products.
+    image: https://www.dlr.de/favicon.ico
+    humanURL: https://geoservice.dlr.de/web/
+    baseURL: https://geoservice.dlr.de/eoc/land/wms
+    tags:
+      - WMS
+      - Land Cover
+      - Land Use
+      - OGC
+      - Geospatial
+    properties:
+      - type: Documentation
+        url: https://geoservice.dlr.de/web/about
+      - type: GetCapabilities
+        url: https://geoservice.dlr.de/eoc/land/wms?SERVICE=WMS&REQUEST=GetCapabilities
+    contact:
+      - FN: Geoservice Manager
+        email: geoservice@dlr.de
+
+  - name: EOC Atmosphere Web Map Service (WMS)
+    description: OGC Web Map Service providing atmospheric data visualization layers
+      from DLR including Sentinel-5P TROPOMI products for ozone, nitrogen dioxide,
+      sulfur dioxide, formaldehyde, and cloud fraction.
+    image: https://www.dlr.de/favicon.ico
+    humanURL: https://geoservice.dlr.de/web/
+    baseURL: https://geoservice.dlr.de/eoc/atmosphere/wms
+    tags:
+      - WMS
+      - Atmosphere
+      - Air Quality
+      - OGC
+      - Sentinel-5P
+      - TROPOMI
+    properties:
+      - type: Documentation
+        url: https://geoservice.dlr.de/web/about
+      - type: GetCapabilities
+        url: https://geoservice.dlr.de/eoc/atmosphere/wms?SERVICE=WMS&REQUEST=GetCapabilities
+    contact:
+      - FN: Geoservice Manager
+        email: geoservice@dlr.de
+
+  - name: EOWEB GeoPortal API
+    description: Multi-mission web portal API for interactive access to the DLR Earth
+      observation data holdings including browse-and-download features, time-series
+      data access, OGC WMS/WFS/WMTS/TMS browsing services, and WCS-based data download
+      for authorized users. Supports guest access for browsing and registered user
+      access for ordering datasets.
+    image: https://www.dlr.de/favicon.ico
+    humanURL: https://eoweb.dlr.de/egp/
+    baseURL: https://eoweb.dlr.de/egp/
+    tags:
+      - Earth Observation
+      - Data Portal
+      - Satellite Data
+      - OGC
+      - WMS
+      - WCS
+      - WMTS
+      - WFS
+    properties:
+      - type: Documentation
+        url: https://eoweb.dlr.de/egp/docs/user/about_egp.html
+      - type: Login
+        url: https://eoweb.dlr.de/egp/resources/context/Login
+    contact:
+      - FN: DLR Earth Observation Center
+        url: https://www.dlr.de/en/eoc/
+
+common:
+  - type: Portal
+    url: https://geoservice.dlr.de/web/
+  - type: DataCatalog
+    url: https://geoservice.dlr.de/data-assets/
+  - type: DataAccess
+    url: https://www.dlr.de/en/eoc/research-transfer/topics/satellite-data/data-access
+  - type: GitHub
+    url: https://github.com/dlr-eoc
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/dlr/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: https://raw.githubusercontent.com/api-evangelist/dlr/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: https://raw.githubusercontent.com/api-evangelist/dlr/refs/heads/main/finops/finops.yml
+  - type: TermsOfService
+    url: https://eoweb.dlr.de/egp/resources/context/Login
+  - type: Contact
+    url: https://www.dlr.de/en/eoc/
+  - type: PrivacyPolicy
+    url: https://www.dlr.de/en/privacy-policy
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

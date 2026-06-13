@@ -1,0 +1,87 @@
+plans:
+
+  - name: Open Access (EOC Geoservice)
+    description: Free, open access to the EOC Geoservice OGC-compliant web services
+      including WMS, WCS, CSW, STAC, and atmosphere endpoints. No registration required.
+      Covers visualization, data discovery, and direct download of publicly available
+      DLR Earth observation products.
+    url: https://geoservice.dlr.de/web/about
+    price: 0.00
+    currency: EUR
+    unit: month
+    features:
+      - STAC API access (80+ EO collections)
+      - WMS imagery and basemap visualization
+      - WCS data extraction and download
+      - CSW catalogue metadata discovery
+      - Atmosphere WMS (Sentinel-5P TROPOMI)
+      - Land cover WMS layers
+      - TanDEM-X global DEM access
+      - World Settlement Footprint data
+      - No registration required
+
+  - name: Guest Access (EOWEB GeoPortal)
+    description: Free guest access to the EOWEB GeoPortal for browsing DLR's Earth
+      observation data holdings. Allows dataset discovery and visualization but does
+      not permit ordering or downloading datasets. No registration required.
+    url: https://eoweb.dlr.de/egp/
+    price: 0.00
+    currency: EUR
+    unit: month
+    features:
+      - Browse DLR EO data catalogue
+      - WMS/WMTS/TMS visualization layers
+      - WFS feature data browsing
+      - Time-series data visualization
+      - No dataset ordering capability
+
+  - name: Registered User (EOWEB GeoPortal)
+    description: Free registered user access to the EOWEB GeoPortal enabling full
+      dataset ordering and download capabilities. Registration requires acceptance of
+      license terms. Access levels vary by dataset with some requiring proposal submission.
+    url: https://eoweb.dlr.de/egp/resources/context/Login
+    price: 0.00
+    currency: EUR
+    unit: month
+    features:
+      - All guest access features
+      - Dataset ordering and download via WCS
+      - Access to Sentinel-1, Sentinel-2 products
+      - DESIS hyperspectral data access
+      - EnMAP hyperspectral data (with license)
+      - TerraSAR-X tasking orders (authorized users)
+
+  - name: Proposal-Based Scientific Access
+    description: Free access to TanDEM-X and TerraSAR-X scientific data through
+      a competitive proposal process evaluated by independent scientific experts.
+      Intended for academic and scientific research institutions. No commercial cost
+      but requires formal proposal submission and approval.
+    url: https://tandemx-science.dlr.de/
+    price: 0.00
+    currency: EUR
+    unit: project
+    features:
+      - TanDEM-X SAR data and DEM products
+      - TerraSAR-X radar imagery
+      - TanDEM-X Science System access
+      - TerraSAR-X Science System access
+      - Expert-reviewed allocation
+      - For scientific research use only
+
+  - name: WDC-RSAT Open Access
+    description: Free public access to the World Data Center for Remote Sensing of
+      the Atmosphere (WDC-RSAT) operated by DLR, providing atmosphere-related
+      satellite-based datasets covering trace gases, aerosols, radiation, dynamics,
+      and cloud physical parameters. Registration may be required for some datasets.
+    url: https://wdc.dlr.de
+    price: 0.00
+    currency: EUR
+    unit: month
+    features:
+      - Atmospheric trace gas data
+      - Aerosol datasets
+      - Cloud physical parameters
+      - Radiation data
+      - GOME-2 products
+      - Statistical data and visualizations
+      - Export data capabilities
