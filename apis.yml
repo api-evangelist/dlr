@@ -214,6 +214,10 @@ apis:
         url: https://www.dlr.de/en/eoc/
 
 common:
+  - type: VulnerabilityDisclosure
+    url: security/dlr-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/dlr-domain-security.yml
   - type: Portal
     url: https://geoservice.dlr.de/web/
   - type: DataCatalog
