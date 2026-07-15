@@ -214,6 +214,8 @@ apis:
         url: https://www.dlr.de/en/eoc/
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/dlr-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/dlr-vulnerability-disclosure.yml
   - type: DomainSecurity
