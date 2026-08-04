@@ -1,0 +1,18 @@
+{
+  "provider": "dlr",
+  "sources": [
+    "dlr-capabilities-api-openapi.yml",
+    "dlr-data-api-openapi.yml",
+    "dlr-stac-api-openapi.yml"
+  ],
+  "outputs": [
+    "dlr-capabilities-api-openapi.yml",
+    "dlr-data-api-openapi.yml",
+    "dlr-stac-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
