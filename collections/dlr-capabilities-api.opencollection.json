@@ -1,0 +1,207 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EOC EO Products Service Capabilities API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Capabilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "landing page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/",
+            "params": [
+              {
+                "name": "otherParameters",
+                "value": "",
+                "type": "query",
+                "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+              }
+            ]
+          },
+          "docs": "The landing page provides links to the API definition, the conformance\nstatements and to the feature collections in this dataset."
+        },
+        {
+          "info": {
+            "name": "information about specifications that this API conforms to",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/conformance",
+            "params": [
+              {
+                "name": "otherParameters",
+                "value": "",
+                "type": "query",
+                "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+              }
+            ]
+          },
+          "docs": "A list of all conformance classes specified in a standard that the\nserver conforms to."
+        },
+        {
+          "info": {
+            "name": "information about filters supported in the CQL filter extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/filter-capabilities",
+            "params": [
+              {
+                "name": "otherParameters",
+                "value": "",
+                "type": "query",
+                "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+              }
+            ]
+          },
+          "docs": "A list of supported filters and functions."
+        },
+        {
+          "info": {
+            "name": "lists the queryable attributes for the search request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/queryables",
+            "params": [
+              {
+                "name": "otherParameters",
+                "value": "",
+                "type": "query",
+                "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+              }
+            ]
+          },
+          "docs": "lists the queryable attributes for the search request"
+        },
+        {
+          "info": {
+            "name": "lists the sortable attributes for the search request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/sortables",
+            "params": [
+              {
+                "name": "otherParameters",
+                "value": "",
+                "type": "query",
+                "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+              }
+            ]
+          },
+          "docs": "lists the sortable attributes for the search request"
+        },
+        {
+          "info": {
+            "name": "the feature collections in the dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections",
+            "params": [
+              {
+                "name": "otherParameters",
+                "value": "",
+                "type": "query",
+                "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+              }
+            ]
+          },
+          "docs": "the feature collections in the dataset"
+        },
+        {
+          "info": {
+            "name": "describe the feature collection with id `collectionId`",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/:collectionId",
+            "params": [
+              {
+                "name": "collectionId",
+                "value": "",
+                "type": "path",
+                "description": "local identifier of a collection"
+              },
+              {
+                "name": "otherParameters",
+                "value": "",
+                "type": "query",
+                "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+              }
+            ]
+          },
+          "docs": "describe the feature collection with id `collectionId`"
+        },
+        {
+          "info": {
+            "name": "lists the queryable attributes for the feature collection with id `collectionId`",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/:collectionId/queryables",
+            "params": [
+              {
+                "name": "collectionId",
+                "value": "",
+                "type": "path",
+                "description": "local identifier of a collection"
+              },
+              {
+                "name": "otherParameters",
+                "value": "",
+                "type": "query",
+                "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+              }
+            ]
+          },
+          "docs": "lists the queryable attributes for the feature collection with id `collectionId`"
+        },
+        {
+          "info": {
+            "name": "lists the sortable attributes for the feature collection with id `collectionId`",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/:collectionId/sortables",
+            "params": [
+              {
+                "name": "collectionId",
+                "value": "",
+                "type": "path",
+                "description": "local identifier of a collection"
+              },
+              {
+                "name": "otherParameters",
+                "value": "",
+                "type": "query",
+                "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+              }
+            ]
+          },
+          "docs": "lists the sortable attributes for the feature collection with id `collectionId`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

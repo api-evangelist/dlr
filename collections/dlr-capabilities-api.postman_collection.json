@@ -1,0 +1,1498 @@
+{
+  "item": [
+    {
+      "id": "285aafb9-f3fd-4214-8641-06952b587d4e",
+      "name": "Capabilities",
+      "description": {
+        "content": "essential characteristics of this API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c3dd53e-2022-4e65-973d-28c234d7a977",
+          "name": "landing page",
+          "request": {
+            "name": "landing page",
+            "description": {
+              "content": "The landing page provides links to the API definition, the conformance\nstatements and to the feature collections in this dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "string",
+                  "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e666eadc-bc20-44f9-941e-130b99a9200c",
+              "name": "The landing page provides links to the API definition\n(link relations `service-desc` and `service-doc`),\nthe Conformance declaration (path `/conformance`,\nlink relation `conformance`), and the Feature\nCollections (path `/collections`, link relation\n`data`).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Buildings in Bonn\",\n  \"description\": \"Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.\",\n  \"links\": [\n    {\n      \"href\": \"http://data.example.org/\",\n      \"rel\": \"self\",\n      \"type\": \"application/json\",\n      \"title\": \"this document\"\n    },\n    {\n      \"href\": \"http://data.example.org/api\",\n      \"rel\": \"service-desc\",\n      \"type\": \"application/vnd.oai.openapi+json;version=3.0\",\n      \"title\": \"the API definition\"\n    },\n    {\n      \"href\": \"http://data.example.org/api.html\",\n      \"rel\": \"service-doc\",\n      \"type\": \"text/html\",\n      \"title\": \"the API documentation\"\n    },\n    {\n      \"href\": \"http://data.example.org/conformance\",\n      \"rel\": \"conformance\",\n      \"type\": \"application/json\",\n      \"title\": \"OGC API conformance classes implemented by this server\"\n    },\n    {\n      \"href\": \"http://data.example.org/collections\",\n      \"rel\": \"data\",\n      \"type\": \"application/json\",\n      \"title\": \"Information about the feature collections\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26969a9c-4677-44e6-85e6-6c936f335564",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c007d36-6232-49f8-8b02-ffc290ea686a",
+          "name": "information about specifications that this API conforms to",
+          "request": {
+            "name": "information about specifications that this API conforms to",
+            "description": {
+              "content": "A list of all conformance classes specified in a standard that the\nserver conforms to.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conformance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "string",
+                  "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e66a1599-377a-4ac8-a486-246f9856691b",
+              "name": "The URIs of all conformance classes supported by the server.\n\nTo support \"generic\" clients that want to access multiple\nOGC API Features implementations - and not \"just\" a specific\nAPI / server, the server declares the conformance\nclasses it implements and conforms to.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conformance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"conformsTo\": [\n    \"http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core\",\n    \"http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30\",\n    \"http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/html\",\n    \"http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a4fdc27-dd98-44a0-95e2-6d47e8c80934",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conformance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cd7bf96-f636-45e0-9d71-73ce74e4fa02",
+          "name": "information about filters supported in the CQL filter extension",
+          "request": {
+            "name": "information about filters supported in the CQL filter extension",
+            "description": {
+              "content": "A list of supported filters and functions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "filter-capabilities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "string",
+                  "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd6e2e83-a391-424b-8a46-033d36cbef1f",
+              "name": "A document listing the server filtering capabilities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "filter-capabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ee30090-50a8-46d9-be76-c3e820e239aa",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "filter-capabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "995e6253-8f0b-4497-b445-1223d603883c",
+          "name": "lists the queryable attributes for the search request",
+          "request": {
+            "name": "lists the queryable attributes for the search request",
+            "description": {},
+            "url": {
+              "path": [
+                "collections",
+                "queryables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "string",
+                  "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b0aa5ab-dcf6-4b2d-a29e-8391c46e426d",
+              "name": "Information about the feature collection queryable properties",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "queryables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryables\": [\n    {\n      \"type\": \"geometry\",\n      \"id\": \"address\"\n    },\n    {\n      \"type\": \"number\",\n      \"id\": \"address\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4642563-adc9-418d-91c5-5e8f5682f790",
+              "name": "The requested URI was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "queryables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9c96d429-9ea6-4af3-bc91-489ce214e3eb",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "queryables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6f2c081-00b7-4ffb-8918-4d14c868424f",
+          "name": "lists the sortable attributes for the search request",
+          "request": {
+            "name": "lists the sortable attributes for the search request",
+            "description": {},
+            "url": {
+              "path": [
+                "collections",
+                "sortables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "string",
+                  "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2b12a86-8f1f-4c21-a358-44ebaec8bc99",
+              "name": "Information about the feature collection sortable properties",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "sortables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryables\": [\n    {\n      \"type\": \"uri\",\n      \"id\": \"address\"\n    },\n    {\n      \"type\": \"number\",\n      \"id\": \"address\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "888e19b5-d5ce-417d-8cab-677c06ada8ef",
+              "name": "The requested URI was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "sortables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc7f8ec9-2bee-47bd-b219-e7e926dda3f4",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "sortables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1341384a-57c0-4488-ac6d-1018df02c182",
+          "name": "the feature collections in the dataset",
+          "request": {
+            "name": "the feature collections in the dataset",
+            "description": {},
+            "url": {
+              "path": [
+                "collections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "string",
+                  "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b282d1a0-4fe4-4936-970e-b164e1a671db",
+              "name": "The feature collections shared by this API.\n\nThe dataset is organized as one or more feature collections. This resource\nprovides information about and access to the collections.\n\nThe response contains the list of collections. For each collection, a link\nto the items in the collection (path `/collections/{collectionId}/items`,\nlink relation `items`) as well as key information about the collection.\nThis information includes:\n\n* A local identifier for the collection that is unique for the dataset;\n* A list of coordinate reference systems (CRS) in which geometries may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);\n* An optional title and description for the collection;\n* An optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;\n* An optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is 'feature').",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": [\n    {\n      \"href\": \"http://data.example.org/collections.json\",\n      \"rel\": \"self\",\n      \"type\": \"application/json\",\n      \"title\": \"this document\"\n    },\n    {\n      \"href\": \"http://data.example.org/collections.html\",\n      \"rel\": \"alternate\",\n      \"type\": \"text/html\",\n      \"title\": \"this document as HTML\"\n    },\n    {\n      \"href\": \"http://schemas.example.org/1.0/buildings.xsd\",\n      \"rel\": \"describedBy\",\n      \"type\": \"application/xml\",\n      \"title\": \"GML application schema for Acme Corporation building data\"\n    },\n    {\n      \"href\": \"http://download.example.org/buildings.gpkg\",\n      \"rel\": \"enclosure\",\n      \"type\": \"application/geopackage+sqlite3\",\n      \"title\": \"Bulk download (GeoPackage)\",\n      \"length\": 472546\n    }\n  ],\n  \"collections\": [\n    {\n      \"id\": \"buildings\",\n      \"title\": \"Buildings\",\n      \"description\": \"Buildings in the city of Bonn.\",\n      \"extent\": {\n        \"spatial\": {\n          \"bbox\": [\n            [\n              7.01,\n              50.63,\n              7.22,\n              50.78\n            ]\n          ]\n        },\n        \"temporal\": {\n          \"interval\": [\n            [\n              \"2010-02-15T12:34:56Z\",\n              null\n            ]\n          ]\n        }\n      },\n      \"links\": [\n        {\n          \"href\": \"http://data.example.org/collections/buildings/items\",\n          \"rel\": \"items\",\n          \"type\": \"application/geo+json\",\n          \"title\": \"Buildings\"\n        },\n        {\n          \"href\": \"http://data.example.org/collections/buildings/items.html\",\n          \"rel\": \"items\",\n          \"type\": \"text/html\",\n          \"title\": \"Buildings\"\n        },\n        {\n          \"href\": \"https://creativecommons.org/publicdomain/zero/1.0/\",\n          \"rel\": \"license\",\n          \"type\": \"text/html\",\n          \"title\": \"CC0-1.0\"\n        },\n        {\n          \"href\": \"https://creativecommons.org/publicdomain/zero/1.0/rdf\",\n          \"rel\": \"license\",\n          \"type\": \"application/rdf+xml\",\n          \"title\": \"CC0-1.0\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08c02038-94fb-4afe-a906-3c09a3f803e2",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab332596-d549-4bac-b1cc-5921349960d1",
+          "name": "describe the feature collection with id `collectionId`",
+          "request": {
+            "name": "describe the feature collection with id `collectionId`",
+            "description": {},
+            "url": {
+              "path": [
+                "collections",
+                ":collectionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "string",
+                  "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collectionId",
+                  "description": "(Required) local identifier of a collection"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d301019d-4552-4908-8373-cda64abab514",
+              "name": "Information about the feature collection with id `collectionId`.\n\nThe response contains a link to the items in the collection\n(path `/collections/{collectionId}/items`, link relation `items`)\nas well as key information about the collection. This information\nincludes:\n\n* A local identifier for the collection that is unique for the dataset;\n* A list of coordinate reference systems (CRS) in which geometries may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);\n* An optional title and description for the collection;\n* An optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;\n* An optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is 'feature').",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":collectionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collectionId",
+                      "description": "(Required) local identifier of a collection"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"buildings\",\n  \"title\": \"Buildings\",\n  \"description\": \"Buildings in the city of Bonn.\",\n  \"extent\": {\n    \"spatial\": {\n      \"bbox\": [\n        [\n          7.01,\n          50.63,\n          7.22,\n          50.78\n        ]\n      ]\n    },\n    \"temporal\": {\n      \"interval\": [\n        [\n          \"2010-02-15T12:34:56Z\",\n          null\n        ]\n      ]\n    }\n  },\n  \"links\": [\n    {\n      \"href\": \"http://data.example.org/collections/buildings/items\",\n      \"rel\": \"items\",\n      \"type\": \"application/geo+json\",\n      \"title\": \"Buildings\"\n    },\n    {\n      \"href\": \"http://data.example.org/collections/buildings/items.html\",\n      \"rel\": \"items\",\n      \"type\": \"text/html\",\n      \"title\": \"Buildings\"\n    },\n    {\n      \"href\": \"https://creativecommons.org/publicdomain/zero/1.0/\",\n      \"rel\": \"license\",\n      \"type\": \"text/html\",\n      \"title\": \"CC0-1.0\"\n    },\n    {\n      \"href\": \"https://creativecommons.org/publicdomain/zero/1.0/rdf\",\n      \"rel\": \"license\",\n      \"type\": \"application/rdf+xml\",\n      \"title\": \"CC0-1.0\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d887ee89-4a9a-471a-93f7-a19e378b1803",
+              "name": "The requested URI was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":collectionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collectionId",
+                      "description": "(Required) local identifier of a collection"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f8677c6b-17b3-460c-bdd9-07cf372b4dc9",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":collectionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collectionId",
+                      "description": "(Required) local identifier of a collection"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81a9bdb2-0ba5-4db0-adb8-7e0124cfeee8",
+          "name": "lists the queryable attributes for the feature collection with id `collectionId`",
+          "request": {
+            "name": "lists the queryable attributes for the feature collection with id `collectionId`",
+            "description": {},
+            "url": {
+              "path": [
+                "collections",
+                ":collectionId",
+                "queryables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "string",
+                  "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collectionId",
+                  "description": "(Required) local identifier of a collection"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d81624d-d0b4-48d5-aac2-280a14a48b17",
+              "name": "Information about the feature collection queryable properties",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":collectionId",
+                    "queryables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collectionId",
+                      "description": "(Required) local identifier of a collection"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryables\": [\n    {\n      \"type\": \"dateTime\",\n      \"id\": \"address\"\n    },\n    {\n      \"type\": \"string\",\n      \"id\": \"address\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73ad72f0-6500-4637-9879-dad8ac81a5e0",
+              "name": "The requested URI was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":collectionId",
+                    "queryables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collectionId",
+                      "description": "(Required) local identifier of a collection"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "311342f3-e37f-4555-8165-01a74931ed36",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":collectionId",
+                    "queryables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collectionId",
+                      "description": "(Required) local identifier of a collection"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e2490c0-7290-41a7-87b7-826191e0ac2b",
+          "name": "lists the sortable attributes for the feature collection with id `collectionId`",
+          "request": {
+            "name": "lists the sortable attributes for the feature collection with id `collectionId`",
+            "description": {},
+            "url": {
+              "path": [
+                "collections",
+                ":collectionId",
+                "sortables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "string",
+                  "description": "Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "collectionId",
+                  "description": "(Required) local identifier of a collection"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c3366dec-6d83-43a3-aeea-5134757390d3",
+              "name": "Information about the feature collection sortable properties",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":collectionId",
+                    "sortables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collectionId",
+                      "description": "(Required) local identifier of a collection"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryables\": [\n    {\n      \"type\": \"string\",\n      \"id\": \"address\"\n    },\n    {\n      \"type\": \"dateTime\",\n      \"id\": \"address\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6677fb7-76bd-488c-9929-23759822c6ff",
+              "name": "The requested URI was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":collectionId",
+                    "sortables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collectionId",
+                      "description": "(Required) local identifier of a collection"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f92abe7b-6cca-4e69-b2bb-743172f7de66",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":collectionId",
+                    "sortables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "string"
+                    },
+                    {
+                      "key": "key_1",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "collectionId",
+                      "description": "(Required) local identifier of a collection"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://geoservice.dlr.de/eoc/ogc/stac/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e3473971-ddd4-4ce1-9797-a10279d678f9",
+    "name": "EOC EO Products Service Capabilities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Provides interoperable access to metadata from EO collections and products of DLR's Earth Observation Center (EOC).\n\nContact Support:\n Name: Geoservice Manager - Earth Observation Center (EOC), DLR\n Email: geoservice@dlr.de",
+      "type": "text/plain"
+    }
+  }
+}
