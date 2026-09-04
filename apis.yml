@@ -255,6 +255,8 @@ apis:
     url: https://geoservice.dlr.de/eoc/ogc/stac/v1/collections
   - type: Search
     url: https://geoservice.dlr.de/eoc/ogc/stac/v1/search
+  - type: ConformanceEndpoint
+    url: https://geoservice.dlr.de/eoc/ogc/stac/v1/conformance
 common:
   - type: AgenticAccess
     url: agentic-access/dlr-agentic-access.yml
