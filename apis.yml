@@ -258,6 +258,8 @@ apis:
   - type: ConformanceEndpoint
     url: https://geoservice.dlr.de/eoc/ogc/stac/v1/conformance
 common:
+  - type: Website
+    url: https://www.dlr.de/
   - type: AgenticAccess
     url: agentic-access/dlr-agentic-access.yml
   - type: VulnerabilityDisclosure
