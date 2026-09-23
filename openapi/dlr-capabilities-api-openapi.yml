@@ -1,4 +1,4 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   title: EOC EO Products Service Capabilities API
   description: Provides interoperable access to metadata from EO collections and products of DLR's Earth Observation Center (EOC).
@@ -192,53 +192,6 @@ paths:
           $ref: '#/components/responses/ServerError'
 components:
   schemas:
-    landingPage:
-      required:
-      - links
-      type: object
-      properties:
-        title:
-          type: string
-          example: Buildings in Bonn
-        description:
-          type: string
-          example: Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-    sortable:
-      required:
-      - name
-      - type
-      type: object
-      properties:
-        id:
-          type: string
-          description: identifier of the attribute that can be used in sortby
-          example: address
-        type:
-          type: string
-          description: the property type
-          enum:
-          - string
-          - uri
-          - number
-          - integer
-          - date
-          - dateTime
-          - boolean
-          - geometry
-    exception:
-      required:
-      - code
-      type: object
-      properties:
-        code:
-          type: string
-        description:
-          type: string
-      description: 'Information about the exception: an error code plus an optional description.'
     confClasses:
       required:
       - conformsTo
@@ -248,6 +201,28 @@ components:
           type: array
           items:
             type: string
+    link:
+      required:
+      - href
+      type: object
+      properties:
+        href:
+          type: string
+          example: http://data.example.com/buildings/123
+        rel:
+          type: string
+          example: alternate
+        type:
+          type: string
+          example: application/geo+json
+        hreflang:
+          type: string
+          example: en
+        title:
+          type: string
+          example: Trierer Strasse 70, 53115 Bonn
+        length:
+          type: integer
     queryable:
       required:
       - name
@@ -315,28 +290,98 @@ components:
             format: uri;
           default:
           - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-    link:
+    sortables:
       required:
-      - href
+      - queryables
       type: object
       properties:
-        href:
+        queryables:
+          type: array
+          description: list of queryable properties
+          items:
+            $ref: '#/components/schemas/sortable'
+    sortable:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        id:
           type: string
-          example: http://data.example.com/buildings/123
-        rel:
-          type: string
-          example: alternate
+          description: identifier of the attribute that can be used in sortby
+          example: address
         type:
           type: string
-          example: application/geo+json
-        hreflang:
+          description: the property type
+          enum:
+          - string
+          - uri
+          - number
+          - integer
+          - date
+          - dateTime
+          - boolean
+          - geometry
+    queryables:
+      required:
+      - queryables
+      type: object
+      properties:
+        queryables:
+          type: array
+          description: list of queryable properties
+          items:
+            $ref: '#/components/schemas/queryable'
+    collections:
+      required:
+      - collections
+      - links
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+        collections:
+          type: array
+          items:
+            $ref: '#/components/schemas/collection'
+        crs:
+          type: array
+          description: a list of CRS identifiers that are supported for more that one feature collection offered by the service
+          example:
+          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+          - http://www.opengis.net/def/crs/EPSG/0/4326
+          items:
+            type: string
+            format: uri
+          default:
+          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    exception:
+      required:
+      - code
+      type: object
+      properties:
+        code:
           type: string
-          example: en
+        description:
+          type: string
+      description: 'Information about the exception: an error code plus an optional description.'
+    landingPage:
+      required:
+      - links
+      type: object
+      properties:
         title:
           type: string
-          example: Trierer Strasse 70, 53115 Bonn
-        length:
-          type: integer
+          example: Buildings in Bonn
+        description:
+          type: string
+          example: Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
     extent:
       type: object
       properties:
@@ -453,9 +498,10 @@ components:
                 - '2011-11-11T12:22:11Z'
                 - null
                 items:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   format: date-time
-                  nullable: true
             trs:
               type: string
               description: 'Coordinate reference system of the coordinates in the temporal extent
@@ -476,95 +522,7 @@ components:
         extents are specified. Extensions may add additional members to represent other
 
         extents, for example, thermal or pressure ranges.'
-    sortables:
-      required:
-      - queryables
-      type: object
-      properties:
-        queryables:
-          type: array
-          description: list of queryable properties
-          items:
-            $ref: '#/components/schemas/sortable'
-    queryables:
-      required:
-      - queryables
-      type: object
-      properties:
-        queryables:
-          type: array
-          description: list of queryable properties
-          items:
-            $ref: '#/components/schemas/queryable'
-    collections:
-      required:
-      - collections
-      - links
-      type: object
-      properties:
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-        collections:
-          type: array
-          items:
-            $ref: '#/components/schemas/collection'
-        crs:
-          type: array
-          description: a list of CRS identifiers that are supported for more that one feature collection offered by the service
-          example:
-          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-          - http://www.opengis.net/def/crs/EPSG/0/4326
-          items:
-            type: string
-            format: uri
-          default:
-          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
   responses:
-    LandingPage:
-      description: 'The landing page provides links to the API definition
-
-        (link relations `service-desc` and `service-doc`),
-
-        the Conformance declaration (path `/conformance`,
-
-        link relation `conformance`), and the Feature
-
-        Collections (path `/collections`, link relation
-
-        `data`).'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/landingPage'
-          example:
-            title: Buildings in Bonn
-            description: Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.
-            links:
-            - href: http://data.example.org/
-              rel: self
-              type: application/json
-              title: this document
-            - href: http://data.example.org/api
-              rel: service-desc
-              type: application/vnd.oai.openapi+json;version=3.0
-              title: the API definition
-            - href: http://data.example.org/api.html
-              rel: service-doc
-              type: text/html
-              title: the API documentation
-            - href: http://data.example.org/conformance
-              rel: conformance
-              type: application/json
-              title: OGC API conformance classes implemented by this server
-            - href: http://data.example.org/collections
-              rel: data
-              type: application/json
-              title: Information about the feature collections
-        text/html:
-          schema:
-            type: string
     Queryables:
       description: Information about the feature collection queryable properties
       content:
@@ -632,14 +590,6 @@ components:
         text/html:
           schema:
             type: string
-    Sortables:
-      description: Information about the feature collection sortable properties
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/sortables'
-    NotFound:
-      description: The requested URI was not found.
     ConformanceDeclaration:
       description: 'The URIs of all conformance classes supported by the server.
 
@@ -749,21 +699,72 @@ components:
         text/html:
           schema:
             type: string
-    FilterCapabilities:
-      description: A document listing the server filtering capabilities
+    NotFound:
+      description: The requested URI was not found.
+    LandingPage:
+      description: 'The landing page provides links to the API definition
+
+        (link relations `service-desc` and `service-doc`),
+
+        the Conformance declaration (path `/conformance`,
+
+        link relation `conformance`), and the Feature
+
+        Collections (path `/collections`, link relation
+
+        `data`).'
       content:
         application/json:
           schema:
-            type: object
+            $ref: '#/components/schemas/landingPage'
+          example:
+            title: Buildings in Bonn
+            description: Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.
+            links:
+            - href: http://data.example.org/
+              rel: self
+              type: application/json
+              title: this document
+            - href: http://data.example.org/api
+              rel: service-desc
+              type: application/vnd.oai.openapi+json;version=3.0
+              title: the API definition
+            - href: http://data.example.org/api.html
+              rel: service-doc
+              type: text/html
+              title: the API documentation
+            - href: http://data.example.org/conformance
+              rel: conformance
+              type: application/json
+              title: OGC API conformance classes implemented by this server
+            - href: http://data.example.org/collections
+              rel: data
+              type: application/json
+              title: Information about the feature collections
         text/html:
           schema:
             type: string
+    Sortables:
+      description: Information about the feature collection sortable properties
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/sortables'
     ServerError:
       description: A server error occurred.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/exception'
+        text/html:
+          schema:
+            type: string
+    FilterCapabilities:
+      description: A document listing the server filtering capabilities
+      content:
+        application/json:
+          schema:
+            type: object
         text/html:
           schema:
             type: string

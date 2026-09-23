@@ -1,9 +1,7 @@
 {
   "provider": "dlr",
   "sources": [
-    "dlr-capabilities-api-openapi.yml",
-    "dlr-data-api-openapi.yml",
-    "dlr-stac-api-openapi.yml"
+    "_original/eoc-stac-api.json"
   ],
   "outputs": [
     "dlr-capabilities-api-openapi.yml",
@@ -13,6 +11,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "eoc-stac-api.json: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+    "eoc-stac-api.json: declared missing tag: STAC",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "dlr-capabilities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dlr-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dlr-stac-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

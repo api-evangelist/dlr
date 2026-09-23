@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: EOC EO Products Service Capabilities Data API
+  title: EOC EO Products Service Data API
   description: Provides interoperable access to metadata from EO collections and products of DLR's Earth Observation Center (EOC).
   contact:
     name: Geoservice Manager - Earth Observation Center (EOC), DLR
@@ -99,314 +99,78 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  schemas:
-    timeStamp:
-      type: string
-      description: This property indicates the time and date when the response was generated.
-      format: date-time
-    numberMatched:
-      minimum: 0
-      type: integer
-      description: 'The number of features of the feature type that match the selection
-
-        parameters like `bbox`.'
-      example: 127
-    featureGeoJSON:
-      required:
-      - geometry
-      - properties
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Feature
-        geometry:
-          $ref: '#/components/schemas/geometryGeoJSON'
-        properties:
-          type: object
-          nullable: true
-        id:
-          oneOf:
-          - type: string
-          - type: integer
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-    exception:
-      required:
-      - code
-      type: object
-      properties:
-        code:
-          type: string
-        description:
-          type: string
-      description: 'Information about the exception: an error code plus an optional description.'
-    link:
-      required:
-      - href
-      type: object
-      properties:
-        href:
-          type: string
-          example: http://data.example.com/buildings/123
-        rel:
-          type: string
-          example: alternate
-        type:
-          type: string
-          example: application/geo+json
-        hreflang:
-          type: string
-          example: en
-        title:
-          type: string
-          example: Trierer Strasse 70, 53115 Bonn
-        length:
-          type: integer
-    polygonGeoJSON:
-      required:
-      - coordinates
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Polygon
-        coordinates:
-          type: array
-          items:
-            minItems: 4
-            type: array
-            items:
-              minItems: 2
-              type: array
-              items:
-                type: number
-    multipolygonGeoJSON:
-      required:
-      - coordinates
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiPolygon
-        coordinates:
-          type: array
-          items:
-            type: array
-            items:
-              minItems: 4
-              type: array
-              items:
-                minItems: 2
-                type: array
-                items:
-                  type: number
-    geometryGeoJSON:
-      oneOf:
-      - $ref: '#/components/schemas/pointGeoJSON'
-      - $ref: '#/components/schemas/multipointGeoJSON'
-      - $ref: '#/components/schemas/linestringGeoJSON'
-      - $ref: '#/components/schemas/multilinestringGeoJSON'
-      - $ref: '#/components/schemas/polygonGeoJSON'
-      - $ref: '#/components/schemas/multipolygonGeoJSON'
-      - $ref: '#/components/schemas/geometrycollectionGeoJSON'
-    linestringGeoJSON:
-      required:
-      - coordinates
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - LineString
-        coordinates:
-          minItems: 2
-          type: array
-          items:
-            minItems: 2
-            type: array
-            items:
-              type: number
-    multilinestringGeoJSON:
-      required:
-      - coordinates
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiLineString
-        coordinates:
-          type: array
-          items:
-            minItems: 2
-            type: array
-            items:
-              minItems: 2
-              type: array
-              items:
-                type: number
-    featureCollectionGeoJSON:
-      required:
-      - features
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - FeatureCollection
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/featureGeoJSON'
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-        timeStamp:
-          $ref: '#/components/schemas/timeStamp'
-        numberMatched:
-          $ref: '#/components/schemas/numberMatched'
-        numberReturned:
-          $ref: '#/components/schemas/numberReturned'
-    geometrycollectionGeoJSON:
-      required:
-      - geometries
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - GeometryCollection
-        geometries:
-          type: array
-          items:
-            $ref: '#/components/schemas/geometryGeoJSON'
-    pointGeoJSON:
-      required:
-      - coordinates
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Point
-        coordinates:
-          minItems: 2
-          type: array
-          items:
-            type: number
-    multipointGeoJSON:
-      required:
-      - coordinates
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiPoint
-        coordinates:
-          type: array
-          items:
-            minItems: 2
-            type: array
-            items:
-              type: number
-    numberReturned:
-      minimum: 0
-      type: integer
-      description: 'The number of features in the feature collection.
-
-
-        A server may omit this information in a response, if the information
-
-        about the number of features is not known or difficult to compute.
-
-
-        If the value is provided, the value shall be identical to the number
-
-        of items in the "features" array.'
-      example: 10
   parameters:
-    featureId:
-      name: featureId
-      in: path
-      description: local identifier of a feature
-      required: true
-      schema:
-        type: string
-    bbox:
-      name: bbox
+    limit:
+      name: limit
       in: query
-      description: 'Only features that have a geometry that intersects the bounding box are selected.
-
-        The bounding box is provided as four or six numbers, depending on whether the
-
-        coordinate reference system includes a vertical axis (height or depth):
+      description: 'The optional limit parameter limits the number of items that are presented in the response document.
 
 
-        * Lower left corner, coordinate axis 1
+        Only items are counted that are on the first level of the collection in the response document.
 
-        * Lower left corner, coordinate axis 2
-
-        * Minimum value, coordinate axis 3 (optional)
-
-        * Upper right corner, coordinate axis 1
-
-        * Upper right corner, coordinate axis 2
-
-        * Maximum value, coordinate axis 3 (optional)
+        Nested objects contained within the explicitly requested items shall not be counted.
 
 
-        The coordinate reference system of the values is WGS 84 longitude/latitude
-
-        (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate
-
-        reference system is specified in the parameter `bbox-crs`.
-
-
-        For WGS 84 longitude/latitude the values are in most cases the sequence of
-
-        minimum longitude, minimum latitude, maximum longitude and maximum latitude.
-
-        However, in cases where the box spans the antimeridian the first value
-
-        (west-most box edge) is larger than the third value (east-most box edge).
-
-
-        If the vertical axis is included, the third and the sixth number are
-
-        the bottom and the top of the 3-dimensional bounding box.
-
-
-        If a feature has multiple spatial geometry properties, it is the decision of the
-
-        server whether only a single spatial geometry property is used to determine
-
-        the extent or all relevant geometries.'
+        Minimum = 1. Maximum = 10000. Default = 10.'
       required: false
       style: form
       explode: false
       schema:
-        maxItems: 6
-        minItems: 4
+        maximum: 500
+        minimum: 1
+        type: integer
+        default: 20
+    filter:
+      name: filter
+      in: query
+      description: Defines a filter that will be applied on items, only items matching the filter will be returned
+      schema:
+        type: string
+    datetime:
+      name: datetime
+      in: query
+      description: 'Either a date-time or an interval, open or closed. Date and time expressions
+
+        adhere to RFC 3339. Open intervals are expressed using double-dots.
+
+
+        Examples:
+
+
+        * A date-time: "2018-02-12T23:20:50Z"
+
+        * A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+
+        * Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+
+
+        Only features that have a temporal property that intersects the value of
+
+        `datetime` are selected.
+
+
+        If a feature has multiple temporal properties, it is the decision of the
+
+        server whether only a single temporal property is used to determine
+
+        the extent or all relevant temporal properties.'
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+    sortby:
+      name: sortby
+      in: query
+      required: false
+      style: form
+      explode: false
+      schema:
+        minItems: 1
         type: array
         items:
-          type: number
+          pattern: '[+|-][A-Za-z_][A-Za-z_0-9]*'
+          type: string
     collectionId:
       name: collectionId
       in: path
@@ -487,51 +251,97 @@ components:
         - WSF_2015
         - WSF_2019
         - WSF_Evolution
-    datetime:
-      name: datetime
+    featureId:
+      name: featureId
+      in: path
+      description: local identifier of a feature
+      required: true
+      schema:
+        type: string
+    bbox-crs:
+      name: bbox-crs
       in: query
-      description: 'Either a date-time or an interval, open or closed. Date and time expressions
-
-        adhere to RFC 3339. Open intervals are expressed using double-dots.
-
-
-        Examples:
-
-
-        * A date-time: "2018-02-12T23:20:50Z"
-
-        * A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
-
-        * Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
-
-
-        Only features that have a temporal property that intersects the value of
-
-        `datetime` are selected.
-
-
-        If a feature has multiple temporal properties, it is the decision of the
-
-        server whether only a single temporal property is used to determine
-
-        the extent or all relevant temporal properties.'
       required: false
       style: form
       explode: false
       schema:
         type: string
-    sortby:
-      name: sortby
+        format: uri
+    bbox:
+      name: bbox
+      in: query
+      description: 'Only features that have a geometry that intersects the bounding box are selected.
+
+        The bounding box is provided as four or six numbers, depending on whether the
+
+        coordinate reference system includes a vertical axis (height or depth):
+
+
+        * Lower left corner, coordinate axis 1
+
+        * Lower left corner, coordinate axis 2
+
+        * Minimum value, coordinate axis 3 (optional)
+
+        * Upper right corner, coordinate axis 1
+
+        * Upper right corner, coordinate axis 2
+
+        * Maximum value, coordinate axis 3 (optional)
+
+
+        The coordinate reference system of the values is WGS 84 longitude/latitude
+
+        (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate
+
+        reference system is specified in the parameter `bbox-crs`.
+
+
+        For WGS 84 longitude/latitude the values are in most cases the sequence of
+
+        minimum longitude, minimum latitude, maximum longitude and maximum latitude.
+
+        However, in cases where the box spans the antimeridian the first value
+
+        (west-most box edge) is larger than the third value (east-most box edge).
+
+
+        If the vertical axis is included, the third and the sixth number are
+
+        the bottom and the top of the 3-dimensional bounding box.
+
+
+        If a feature has multiple spatial geometry properties, it is the decision of the
+
+        server whether only a single spatial geometry property is used to determine
+
+        the extent or all relevant geometries.'
+      required: false
+      style: form
+      explode: false
+      schema:
+        maxItems: 6
+        minItems: 4
+        type: array
+        items:
+          type: number
+    otherParameters:
+      name: otherParameters
+      in: query
+      description: Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)
+      style: form
+      schema:
+        type: object
+        additionalProperties: true
+    crs:
+      name: crs
       in: query
       required: false
       style: form
       explode: false
       schema:
-        minItems: 1
-        type: array
-        items:
-          pattern: '[+|-][A-Za-z_][A-Za-z_0-9]*'
-          type: string
+        type: string
+        format: uri
     filter-lang:
       name: filter-lang
       in: query
@@ -542,108 +352,250 @@ components:
         - cql-text
         - cql-json
         default: cql-text
-    limit:
-      name: limit
-      in: query
-      description: 'The optional limit parameter limits the number of items that are presented in the response document.
+  schemas:
+    pointGeoJSON:
+      required:
+      - coordinates
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Point
+        coordinates:
+          minItems: 2
+          type: array
+          items:
+            type: number
+    linestringGeoJSON:
+      required:
+      - coordinates
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - LineString
+        coordinates:
+          minItems: 2
+          type: array
+          items:
+            minItems: 2
+            type: array
+            items:
+              type: number
+    link:
+      required:
+      - href
+      type: object
+      properties:
+        href:
+          type: string
+          example: http://data.example.com/buildings/123
+        rel:
+          type: string
+          example: alternate
+        type:
+          type: string
+          example: application/geo+json
+        hreflang:
+          type: string
+          example: en
+        title:
+          type: string
+          example: Trierer Strasse 70, 53115 Bonn
+        length:
+          type: integer
+    multilinestringGeoJSON:
+      required:
+      - coordinates
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiLineString
+        coordinates:
+          type: array
+          items:
+            minItems: 2
+            type: array
+            items:
+              minItems: 2
+              type: array
+              items:
+                type: number
+    timeStamp:
+      type: string
+      description: This property indicates the time and date when the response was generated.
+      format: date-time
+    multipointGeoJSON:
+      required:
+      - coordinates
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPoint
+        coordinates:
+          type: array
+          items:
+            minItems: 2
+            type: array
+            items:
+              type: number
+    multipolygonGeoJSON:
+      required:
+      - coordinates
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              minItems: 4
+              type: array
+              items:
+                minItems: 2
+                type: array
+                items:
+                  type: number
+    numberReturned:
+      minimum: 0
+      type: integer
+      description: 'The number of features in the feature collection.
 
 
-        Only items are counted that are on the first level of the collection in the response document.
+        A server may omit this information in a response, if the information
 
-        Nested objects contained within the explicitly requested items shall not be counted.
+        about the number of features is not known or difficult to compute.
 
 
-        Minimum = 1. Maximum = 10000. Default = 10.'
-      required: false
-      style: form
-      explode: false
-      schema:
-        maximum: 500
-        minimum: 1
-        type: integer
-        default: 20
-    crs:
-      name: crs
-      in: query
-      required: false
-      style: form
-      explode: false
-      schema:
-        type: string
-        format: uri
-    bbox-crs:
-      name: bbox-crs
-      in: query
-      required: false
-      style: form
-      explode: false
-      schema:
-        type: string
-        format: uri
-    filter:
-      name: filter
-      in: query
-      description: Defines a filter that will be applied on items, only items matching the filter will be returned
-      schema:
-        type: string
-    otherParameters:
-      name: otherParameters
-      in: query
-      description: Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)
-      style: form
-      schema:
-        type: object
-        additionalProperties: true
-  responses:
-    Feature:
-      description: 'fetch the feature with id `featureId` in the feature collection
+        If the value is provided, the value shall be identical to the number
 
-        with id `collectionId`'
-      content:
-        application/geo+json:
-          schema:
+        of items in the "features" array.'
+      example: 10
+    featureCollectionGeoJSON:
+      required:
+      - features
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+        features:
+          type: array
+          items:
             $ref: '#/components/schemas/featureGeoJSON'
-          example:
-            type: Feature
-            links:
-            - href: http://data.example.com/id/building/123
-              rel: canonical
-              title: canonical URI of the building
-            - href: http://data.example.com/collections/buildings/items/123.json
-              rel: self
-              type: application/geo+json
-              title: this document
-            - href: http://data.example.com/collections/buildings/items/123.html
-              rel: alternate
-              type: text/html
-              title: this document as HTML
-            - href: http://data.example.com/collections/buildings
-              rel: collection
-              type: application/geo+json
-              title: the collection document
-            id: '123'
-            geometry:
-              type: Polygon
-              coordinates:
-              - '...'
-            properties:
-              function: residential
-              floors: '2'
-              lastUpdate: '2015-08-01T12:34:56Z'
-        text/html:
-          schema:
-            type: string
-    NotFound:
-      description: The requested URI was not found.
-    InvalidParameter:
-      description: A query parameter has an invalid value.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exception'
-        text/html:
-          schema:
-            type: string
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+        timeStamp:
+          $ref: '#/components/schemas/timeStamp'
+        numberMatched:
+          $ref: '#/components/schemas/numberMatched'
+        numberReturned:
+          $ref: '#/components/schemas/numberReturned'
+    geometrycollectionGeoJSON:
+      required:
+      - geometries
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - GeometryCollection
+        geometries:
+          type: array
+          items:
+            $ref: '#/components/schemas/geometryGeoJSON'
+    exception:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+      description: 'Information about the exception: an error code plus an optional description.'
+    polygonGeoJSON:
+      required:
+      - coordinates
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+        coordinates:
+          type: array
+          items:
+            minItems: 4
+            type: array
+            items:
+              minItems: 2
+              type: array
+              items:
+                type: number
+    numberMatched:
+      minimum: 0
+      type: integer
+      description: 'The number of features of the feature type that match the selection
+
+        parameters like `bbox`.'
+      example: 127
+    geometryGeoJSON:
+      oneOf:
+      - $ref: '#/components/schemas/pointGeoJSON'
+      - $ref: '#/components/schemas/multipointGeoJSON'
+      - $ref: '#/components/schemas/linestringGeoJSON'
+      - $ref: '#/components/schemas/multilinestringGeoJSON'
+      - $ref: '#/components/schemas/polygonGeoJSON'
+      - $ref: '#/components/schemas/multipolygonGeoJSON'
+      - $ref: '#/components/schemas/geometrycollectionGeoJSON'
+    featureGeoJSON:
+      required:
+      - geometry
+      - properties
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Feature
+        geometry:
+          $ref: '#/components/schemas/geometryGeoJSON'
+        properties:
+          type:
+          - object
+          - 'null'
+        id:
+          oneOf:
+          - type: string
+          - type: integer
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+  responses:
     Features:
       description: 'The response is a document consisting of features in the collection.
 
@@ -726,6 +678,55 @@ components:
         text/html:
           schema:
             type: string
+    Feature:
+      description: 'fetch the feature with id `featureId` in the feature collection
+
+        with id `collectionId`'
+      content:
+        application/geo+json:
+          schema:
+            $ref: '#/components/schemas/featureGeoJSON'
+          example:
+            type: Feature
+            links:
+            - href: http://data.example.com/id/building/123
+              rel: canonical
+              title: canonical URI of the building
+            - href: http://data.example.com/collections/buildings/items/123.json
+              rel: self
+              type: application/geo+json
+              title: this document
+            - href: http://data.example.com/collections/buildings/items/123.html
+              rel: alternate
+              type: text/html
+              title: this document as HTML
+            - href: http://data.example.com/collections/buildings
+              rel: collection
+              type: application/geo+json
+              title: the collection document
+            id: '123'
+            geometry:
+              type: Polygon
+              coordinates:
+              - '...'
+            properties:
+              function: residential
+              floors: '2'
+              lastUpdate: '2015-08-01T12:34:56Z'
+        text/html:
+          schema:
+            type: string
+    InvalidParameter:
+      description: A query parameter has an invalid value.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exception'
+        text/html:
+          schema:
+            type: string
+    NotFound:
+      description: The requested URI was not found.
     ServerError:
       description: A server error occurred.
       content:
