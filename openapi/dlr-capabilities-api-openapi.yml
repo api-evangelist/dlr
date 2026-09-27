@@ -191,38 +191,352 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  schemas:
-    confClasses:
-      required:
-      - conformsTo
-      type: object
-      properties:
-        conformsTo:
-          type: array
-          items:
+  responses:
+    ConformanceDeclaration:
+      description: 'The URIs of all conformance classes supported by the server.
+
+
+        To support "generic" clients that want to access multiple
+
+        OGC API Features implementations - and not "just" a specific
+
+        API / server, the server declares the conformance
+
+        classes it implements and conforms to.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/confClasses'
+          example:
+            conformsTo:
+            - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core
+            - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30
+            - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/html
+            - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson
+        text/html:
+          schema:
             type: string
-    link:
+    ServerError:
+      description: A server error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exception'
+        text/html:
+          schema:
+            type: string
+    FilterCapabilities:
+      description: A document listing the server filtering capabilities
+      content:
+        application/json:
+          schema:
+            type: object
+        text/html:
+          schema:
+            type: string
+    Sortables:
+      description: Information about the feature collection sortable properties
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/sortables'
+    Collections:
+      description: 'The feature collections shared by this API.
+
+
+        The dataset is organized as one or more feature collections. This resource
+
+        provides information about and access to the collections.
+
+
+        The response contains the list of collections. For each collection, a link
+
+        to the items in the collection (path `/collections/{collectionId}/items`,
+
+        link relation `items`) as well as key information about the collection.
+
+        This information includes:
+
+
+        * A local identifier for the collection that is unique for the dataset;
+
+        * A list of coordinate reference systems (CRS) in which geometries may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);
+
+        * An optional title and description for the collection;
+
+        * An optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;
+
+        * An optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is ''feature'').'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/collections'
+          example:
+            links:
+            - href: http://data.example.org/collections.json
+              rel: self
+              type: application/json
+              title: this document
+            - href: http://data.example.org/collections.html
+              rel: alternate
+              type: text/html
+              title: this document as HTML
+            - href: http://schemas.example.org/1.0/buildings.xsd
+              rel: describedBy
+              type: application/xml
+              title: GML application schema for Acme Corporation building data
+            - href: http://download.example.org/buildings.gpkg
+              rel: enclosure
+              type: application/geopackage+sqlite3
+              title: Bulk download (GeoPackage)
+              length: 472546
+            collections:
+            - id: buildings
+              title: Buildings
+              description: Buildings in the city of Bonn.
+              extent:
+                spatial:
+                  bbox:
+                  - - 7.01
+                    - 50.63
+                    - 7.22
+                    - 50.78
+                temporal:
+                  interval:
+                  - - '2010-02-15T12:34:56Z'
+                    - null
+              links:
+              - href: http://data.example.org/collections/buildings/items
+                rel: items
+                type: application/geo+json
+                title: Buildings
+              - href: http://data.example.org/collections/buildings/items.html
+                rel: items
+                type: text/html
+                title: Buildings
+              - href: https://creativecommons.org/publicdomain/zero/1.0/
+                rel: license
+                type: text/html
+                title: CC0-1.0
+              - href: https://creativecommons.org/publicdomain/zero/1.0/rdf
+                rel: license
+                type: application/rdf+xml
+                title: CC0-1.0
+        text/html:
+          schema:
+            type: string
+    Collection:
+      description: 'Information about the feature collection with id `collectionId`.
+
+
+        The response contains a link to the items in the collection
+
+        (path `/collections/{collectionId}/items`, link relation `items`)
+
+        as well as key information about the collection. This information
+
+        includes:
+
+
+        * A local identifier for the collection that is unique for the dataset;
+
+        * A list of coordinate reference systems (CRS) in which geometries may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);
+
+        * An optional title and description for the collection;
+
+        * An optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;
+
+        * An optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is ''feature'').'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/collection'
+          example:
+            id: buildings
+            title: Buildings
+            description: Buildings in the city of Bonn.
+            extent:
+              spatial:
+                bbox:
+                - - 7.01
+                  - 50.63
+                  - 7.22
+                  - 50.78
+              temporal:
+                interval:
+                - - '2010-02-15T12:34:56Z'
+                  - null
+            links:
+            - href: http://data.example.org/collections/buildings/items
+              rel: items
+              type: application/geo+json
+              title: Buildings
+            - href: http://data.example.org/collections/buildings/items.html
+              rel: items
+              type: text/html
+              title: Buildings
+            - href: https://creativecommons.org/publicdomain/zero/1.0/
+              rel: license
+              type: text/html
+              title: CC0-1.0
+            - href: https://creativecommons.org/publicdomain/zero/1.0/rdf
+              rel: license
+              type: application/rdf+xml
+              title: CC0-1.0
+        text/html:
+          schema:
+            type: string
+    LandingPage:
+      description: 'The landing page provides links to the API definition
+
+        (link relations `service-desc` and `service-doc`),
+
+        the Conformance declaration (path `/conformance`,
+
+        link relation `conformance`), and the Feature
+
+        Collections (path `/collections`, link relation
+
+        `data`).'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/landingPage'
+          example:
+            title: Buildings in Bonn
+            description: Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.
+            links:
+            - href: http://data.example.org/
+              rel: self
+              type: application/json
+              title: this document
+            - href: http://data.example.org/api
+              rel: service-desc
+              type: application/vnd.oai.openapi+json;version=3.0
+              title: the API definition
+            - href: http://data.example.org/api.html
+              rel: service-doc
+              type: text/html
+              title: the API documentation
+            - href: http://data.example.org/conformance
+              rel: conformance
+              type: application/json
+              title: OGC API conformance classes implemented by this server
+            - href: http://data.example.org/collections
+              rel: data
+              type: application/json
+              title: Information about the feature collections
+        text/html:
+          schema:
+            type: string
+    NotFound:
+      description: The requested URI was not found.
+    Queryables:
+      description: Information about the feature collection queryable properties
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/queryables'
+  parameters:
+    otherParameters:
+      name: otherParameters
+      in: query
+      description: Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)
+      style: form
+      schema:
+        type: object
+        additionalProperties: true
+    collectionId:
+      name: collectionId
+      in: path
+      description: local identifier of a collection
+      required: true
+      schema:
+        type: string
+        enum:
+        - CROPTYPES_DE_P1Y
+        - CROPTYPES_DE_P1Y_V02
+        - D4H
+        - DESIS_HSI_L2A
+        - DatKI_LBMDE_2021
+        - ENMAP_HSI_L0_QL
+        - ENMAP_HSI_L2A
+        - FCCL_DE_P1M
+        - FOREST_STRUCTURE_DE_AGBD_P1Y
+        - FOREST_STRUCTURE_DE_COVER_P1Y
+        - FOREST_STRUCTURE_DE_RH95_P1Y
+        - GL_MOW_DE_P1Y_FC
+        - GL_MOW_DE_P1Y_FREQ
+        - GSP_SCDE_MEAN
+        - GSP_SCDE_P1Y
+        - GSP_SCDL_MEAN
+        - GSP_SCDL_P1Y
+        - GSP_SCD_MEAN
+        - GSP_SCD_P1Y
+        - GSP_SCE_P1D
+        - GWP_P1D
+        - GWP_P1M
+        - GWP_P1Y
+        - METOP_GOME2_L3_P1D_BRO
+        - METOP_GOME2_L3_P1D_CF
+        - METOP_GOME2_L3_P1D_H2O
+        - METOP_GOME2_L3_P1D_HCHO
+        - METOP_GOME2_L3_P1D_NO2
+        - METOP_GOME2_L3_P1D_NO2TROPO
+        - METOP_GOME2_L3_P1D_O3
+        - METOP_GOME2_L3_P1D_SO2
+        - N2N_NOISE_AI_DE_2017
+        - N2N_NOISE_DE_2017
+        - S2-soilsuite-africa-2018-2021-P4Y
+        - S2-soilsuite-europe-2018-2022-P5Y
+        - S2_L2A_MAJA
+        - S2_L2A_MAJA_v2
+        - S2_L3A_WASP
+        - S2_L3A_WASP_V2
+        - S5P_TROPOMI_L3_P1D_AI_v2
+        - S5P_TROPOMI_L3_P1D_ALH_v2
+        - S5P_TROPOMI_L3_P1D_AOD_v2
+        - S5P_TROPOMI_L3_P1D_ASSA_v2
+        - S5P_TROPOMI_L3_P1D_CF
+        - S5P_TROPOMI_L3_P1D_CF_v2
+        - S5P_TROPOMI_L3_P1D_COT
+        - S5P_TROPOMI_L3_P1D_COT_v2
+        - S5P_TROPOMI_L3_P1D_CTH
+        - S5P_TROPOMI_L3_P1D_CTH_v2
+        - S5P_TROPOMI_L3_P1D_H2O_v2
+        - S5P_TROPOMI_L3_P1D_HCHO
+        - S5P_TROPOMI_L3_P1D_HCHO_v2
+        - S5P_TROPOMI_L3_P1D_O3
+        - S5P_TROPOMI_L3_P1D_O3_v2
+        - S5P_TROPOMI_L3_P1D_SO2
+        - S5P_TROPOMI_L3_P1D_SO2LH_v2
+        - S5P_TROPOMI_L3_P1D_SO2_v2
+        - S5P_TROPOMI_L3_P1D_UVI_v2
+        - S5P_TROPOMI_L4_P1D_NO2surf
+        - SAR4TEC_ASCE
+        - SAR4TEC_DESC
+        - SUPERSITES
+        - SWIM_WE
+        - TDM_DEM_90
+        - TDM_FNF_50
+        - TIMELINE_AVHRR_P1M_LSTD
+        - TIMELINE_AVHRR_P1M_SST
+        - URBAN_DEGREE_DE
+        - WSF3D_MATSTOCK
+        - WSF_2015
+        - WSF_2019
+        - WSF_Evolution
+  schemas:
+    sortables:
       required:
-      - href
+      - queryables
       type: object
       properties:
-        href:
-          type: string
-          example: http://data.example.com/buildings/123
-        rel:
-          type: string
-          example: alternate
-        type:
-          type: string
-          example: application/geo+json
-        hreflang:
-          type: string
-          example: en
-        title:
-          type: string
-          example: Trierer Strasse 70, 53115 Bonn
-        length:
-          type: integer
+        queryables:
+          type: array
+          description: list of queryable properties
+          items:
+            $ref: '#/components/schemas/sortable'
     queryable:
       required:
       - name
@@ -290,83 +604,6 @@ components:
             format: uri;
           default:
           - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-    sortables:
-      required:
-      - queryables
-      type: object
-      properties:
-        queryables:
-          type: array
-          description: list of queryable properties
-          items:
-            $ref: '#/components/schemas/sortable'
-    sortable:
-      required:
-      - name
-      - type
-      type: object
-      properties:
-        id:
-          type: string
-          description: identifier of the attribute that can be used in sortby
-          example: address
-        type:
-          type: string
-          description: the property type
-          enum:
-          - string
-          - uri
-          - number
-          - integer
-          - date
-          - dateTime
-          - boolean
-          - geometry
-    queryables:
-      required:
-      - queryables
-      type: object
-      properties:
-        queryables:
-          type: array
-          description: list of queryable properties
-          items:
-            $ref: '#/components/schemas/queryable'
-    collections:
-      required:
-      - collections
-      - links
-      type: object
-      properties:
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-        collections:
-          type: array
-          items:
-            $ref: '#/components/schemas/collection'
-        crs:
-          type: array
-          description: a list of CRS identifiers that are supported for more that one feature collection offered by the service
-          example:
-          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-          - http://www.opengis.net/def/crs/EPSG/0/4326
-          items:
-            type: string
-            format: uri
-          default:
-          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-    exception:
-      required:
-      - code
-      type: object
-      properties:
-        code:
-          type: string
-        description:
-          type: string
-      description: 'Information about the exception: an error code plus an optional description.'
     landingPage:
       required:
       - links
@@ -522,341 +759,104 @@ components:
         extents are specified. Extensions may add additional members to represent other
 
         extents, for example, thermal or pressure ranges.'
-  responses:
-    Queryables:
-      description: Information about the feature collection queryable properties
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/queryables'
-    Collection:
-      description: 'Information about the feature collection with id `collectionId`.
-
-
-        The response contains a link to the items in the collection
-
-        (path `/collections/{collectionId}/items`, link relation `items`)
-
-        as well as key information about the collection. This information
-
-        includes:
-
-
-        * A local identifier for the collection that is unique for the dataset;
-
-        * A list of coordinate reference systems (CRS) in which geometries may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);
-
-        * An optional title and description for the collection;
-
-        * An optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;
-
-        * An optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is ''feature'').'
-      content:
-        application/json:
-          schema:
+    exception:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+      description: 'Information about the exception: an error code plus an optional description.'
+    queryables:
+      required:
+      - queryables
+      type: object
+      properties:
+        queryables:
+          type: array
+          description: list of queryable properties
+          items:
+            $ref: '#/components/schemas/queryable'
+    confClasses:
+      required:
+      - conformsTo
+      type: object
+      properties:
+        conformsTo:
+          type: array
+          items:
+            type: string
+    collections:
+      required:
+      - collections
+      - links
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+        collections:
+          type: array
+          items:
             $ref: '#/components/schemas/collection'
+        crs:
+          type: array
+          description: a list of CRS identifiers that are supported for more that one feature collection offered by the service
           example:
-            id: buildings
-            title: Buildings
-            description: Buildings in the city of Bonn.
-            extent:
-              spatial:
-                bbox:
-                - - 7.01
-                  - 50.63
-                  - 7.22
-                  - 50.78
-              temporal:
-                interval:
-                - - '2010-02-15T12:34:56Z'
-                  - null
-            links:
-            - href: http://data.example.org/collections/buildings/items
-              rel: items
-              type: application/geo+json
-              title: Buildings
-            - href: http://data.example.org/collections/buildings/items.html
-              rel: items
-              type: text/html
-              title: Buildings
-            - href: https://creativecommons.org/publicdomain/zero/1.0/
-              rel: license
-              type: text/html
-              title: CC0-1.0
-            - href: https://creativecommons.org/publicdomain/zero/1.0/rdf
-              rel: license
-              type: application/rdf+xml
-              title: CC0-1.0
-        text/html:
-          schema:
+          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+          - http://www.opengis.net/def/crs/EPSG/0/4326
+          items:
             type: string
-    ConformanceDeclaration:
-      description: 'The URIs of all conformance classes supported by the server.
-
-
-        To support "generic" clients that want to access multiple
-
-        OGC API Features implementations - and not "just" a specific
-
-        API / server, the server declares the conformance
-
-        classes it implements and conforms to.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/confClasses'
-          example:
-            conformsTo:
-            - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core
-            - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30
-            - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/html
-            - http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson
-        text/html:
-          schema:
-            type: string
-    Collections:
-      description: 'The feature collections shared by this API.
-
-
-        The dataset is organized as one or more feature collections. This resource
-
-        provides information about and access to the collections.
-
-
-        The response contains the list of collections. For each collection, a link
-
-        to the items in the collection (path `/collections/{collectionId}/items`,
-
-        link relation `items`) as well as key information about the collection.
-
-        This information includes:
-
-
-        * A local identifier for the collection that is unique for the dataset;
-
-        * A list of coordinate reference systems (CRS) in which geometries may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);
-
-        * An optional title and description for the collection;
-
-        * An optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;
-
-        * An optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is ''feature'').'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/collections'
-          example:
-            links:
-            - href: http://data.example.org/collections.json
-              rel: self
-              type: application/json
-              title: this document
-            - href: http://data.example.org/collections.html
-              rel: alternate
-              type: text/html
-              title: this document as HTML
-            - href: http://schemas.example.org/1.0/buildings.xsd
-              rel: describedBy
-              type: application/xml
-              title: GML application schema for Acme Corporation building data
-            - href: http://download.example.org/buildings.gpkg
-              rel: enclosure
-              type: application/geopackage+sqlite3
-              title: Bulk download (GeoPackage)
-              length: 472546
-            collections:
-            - id: buildings
-              title: Buildings
-              description: Buildings in the city of Bonn.
-              extent:
-                spatial:
-                  bbox:
-                  - - 7.01
-                    - 50.63
-                    - 7.22
-                    - 50.78
-                temporal:
-                  interval:
-                  - - '2010-02-15T12:34:56Z'
-                    - null
-              links:
-              - href: http://data.example.org/collections/buildings/items
-                rel: items
-                type: application/geo+json
-                title: Buildings
-              - href: http://data.example.org/collections/buildings/items.html
-                rel: items
-                type: text/html
-                title: Buildings
-              - href: https://creativecommons.org/publicdomain/zero/1.0/
-                rel: license
-                type: text/html
-                title: CC0-1.0
-              - href: https://creativecommons.org/publicdomain/zero/1.0/rdf
-                rel: license
-                type: application/rdf+xml
-                title: CC0-1.0
-        text/html:
-          schema:
-            type: string
-    NotFound:
-      description: The requested URI was not found.
-    LandingPage:
-      description: 'The landing page provides links to the API definition
-
-        (link relations `service-desc` and `service-doc`),
-
-        the Conformance declaration (path `/conformance`,
-
-        link relation `conformance`), and the Feature
-
-        Collections (path `/collections`, link relation
-
-        `data`).'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/landingPage'
-          example:
-            title: Buildings in Bonn
-            description: Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.
-            links:
-            - href: http://data.example.org/
-              rel: self
-              type: application/json
-              title: this document
-            - href: http://data.example.org/api
-              rel: service-desc
-              type: application/vnd.oai.openapi+json;version=3.0
-              title: the API definition
-            - href: http://data.example.org/api.html
-              rel: service-doc
-              type: text/html
-              title: the API documentation
-            - href: http://data.example.org/conformance
-              rel: conformance
-              type: application/json
-              title: OGC API conformance classes implemented by this server
-            - href: http://data.example.org/collections
-              rel: data
-              type: application/json
-              title: Information about the feature collections
-        text/html:
-          schema:
-            type: string
-    Sortables:
-      description: Information about the feature collection sortable properties
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/sortables'
-    ServerError:
-      description: A server error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exception'
-        text/html:
-          schema:
-            type: string
-    FilterCapabilities:
-      description: A document listing the server filtering capabilities
-      content:
-        application/json:
-          schema:
-            type: object
-        text/html:
-          schema:
-            type: string
-  parameters:
-    collectionId:
-      name: collectionId
-      in: path
-      description: local identifier of a collection
-      required: true
-      schema:
-        type: string
-        enum:
-        - CROPTYPES_DE_P1Y
-        - CROPTYPES_DE_P1Y_V02
-        - D4H
-        - DESIS_HSI_L2A
-        - DatKI_LBMDE_2021
-        - ENMAP_HSI_L0_QL
-        - ENMAP_HSI_L2A
-        - FCCL_DE_P1M
-        - FOREST_STRUCTURE_DE_AGBD_P1Y
-        - FOREST_STRUCTURE_DE_COVER_P1Y
-        - FOREST_STRUCTURE_DE_RH95_P1Y
-        - GL_MOW_DE_P1Y_FC
-        - GL_MOW_DE_P1Y_FREQ
-        - GSP_SCDE_MEAN
-        - GSP_SCDE_P1Y
-        - GSP_SCDL_MEAN
-        - GSP_SCDL_P1Y
-        - GSP_SCD_MEAN
-        - GSP_SCD_P1Y
-        - GSP_SCE_P1D
-        - GWP_P1D
-        - GWP_P1M
-        - GWP_P1Y
-        - METOP_GOME2_L3_P1D_BRO
-        - METOP_GOME2_L3_P1D_CF
-        - METOP_GOME2_L3_P1D_H2O
-        - METOP_GOME2_L3_P1D_HCHO
-        - METOP_GOME2_L3_P1D_NO2
-        - METOP_GOME2_L3_P1D_NO2TROPO
-        - METOP_GOME2_L3_P1D_O3
-        - METOP_GOME2_L3_P1D_SO2
-        - N2N_NOISE_AI_DE_2017
-        - N2N_NOISE_DE_2017
-        - S2-soilsuite-africa-2018-2021-P4Y
-        - S2-soilsuite-europe-2018-2022-P5Y
-        - S2_L2A_MAJA
-        - S2_L2A_MAJA_v2
-        - S2_L3A_WASP
-        - S2_L3A_WASP_V2
-        - S5P_TROPOMI_L3_P1D_AI_v2
-        - S5P_TROPOMI_L3_P1D_ALH_v2
-        - S5P_TROPOMI_L3_P1D_AOD_v2
-        - S5P_TROPOMI_L3_P1D_ASSA_v2
-        - S5P_TROPOMI_L3_P1D_CF
-        - S5P_TROPOMI_L3_P1D_CF_v2
-        - S5P_TROPOMI_L3_P1D_COT
-        - S5P_TROPOMI_L3_P1D_COT_v2
-        - S5P_TROPOMI_L3_P1D_CTH
-        - S5P_TROPOMI_L3_P1D_CTH_v2
-        - S5P_TROPOMI_L3_P1D_H2O_v2
-        - S5P_TROPOMI_L3_P1D_HCHO
-        - S5P_TROPOMI_L3_P1D_HCHO_v2
-        - S5P_TROPOMI_L3_P1D_O3
-        - S5P_TROPOMI_L3_P1D_O3_v2
-        - S5P_TROPOMI_L3_P1D_SO2
-        - S5P_TROPOMI_L3_P1D_SO2LH_v2
-        - S5P_TROPOMI_L3_P1D_SO2_v2
-        - S5P_TROPOMI_L3_P1D_UVI_v2
-        - S5P_TROPOMI_L4_P1D_NO2surf
-        - SAR4TEC_ASCE
-        - SAR4TEC_DESC
-        - SUPERSITES
-        - SWIM_WE
-        - TDM_DEM_90
-        - TDM_FNF_50
-        - TIMELINE_AVHRR_P1M_LSTD
-        - TIMELINE_AVHRR_P1M_SST
-        - URBAN_DEGREE_DE
-        - WSF3D_MATSTOCK
-        - WSF_2015
-        - WSF_2019
-        - WSF_Evolution
-    otherParameters:
-      name: otherParameters
-      in: query
-      description: Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)
-      style: form
-      schema:
-        type: object
-        additionalProperties: true
+            format: uri
+          default:
+          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    sortable:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        id:
+          type: string
+          description: identifier of the attribute that can be used in sortby
+          example: address
+        type:
+          type: string
+          description: the property type
+          enum:
+          - string
+          - uri
+          - number
+          - integer
+          - date
+          - dateTime
+          - boolean
+          - geometry
+    link:
+      required:
+      - href
+      type: object
+      properties:
+        href:
+          type: string
+          example: http://data.example.com/buildings/123
+        rel:
+          type: string
+          example: alternate
+        type:
+          type: string
+          example: application/geo+json
+        hreflang:
+          type: string
+          example: en
+        title:
+          type: string
+          example: Trierer Strasse 70, 53115 Bonn
+        length:
+          type: integer
 externalDocs:
   description: STAC API specification
   url: https://github.com/radiantearth/stac-api-spec
