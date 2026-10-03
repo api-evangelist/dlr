@@ -191,7 +191,402 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
+  schemas:
+    collections:
+      required:
+      - collections
+      - links
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+        collections:
+          type: array
+          items:
+            $ref: '#/components/schemas/collection'
+        crs:
+          type: array
+          description: a list of CRS identifiers that are supported for more that one feature collection offered by the service
+          example:
+          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+          - http://www.opengis.net/def/crs/EPSG/0/4326
+          items:
+            type: string
+            format: uri
+          default:
+          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    sortables:
+      required:
+      - queryables
+      type: object
+      properties:
+        queryables:
+          type: array
+          description: list of queryable properties
+          items:
+            $ref: '#/components/schemas/sortable'
+    exception:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+      description: 'Information about the exception: an error code plus an optional description.'
+    sortable:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        id:
+          type: string
+          description: identifier of the attribute that can be used in sortby
+          example: address
+        type:
+          type: string
+          description: the property type
+          enum:
+          - string
+          - uri
+          - number
+          - integer
+          - date
+          - dateTime
+          - boolean
+          - geometry
+    queryables:
+      required:
+      - queryables
+      type: object
+      properties:
+        queryables:
+          type: array
+          description: list of queryable properties
+          items:
+            $ref: '#/components/schemas/queryable'
+    link:
+      required:
+      - href
+      type: object
+      properties:
+        href:
+          type: string
+          example: http://data.example.com/buildings/123
+        rel:
+          type: string
+          example: alternate
+        type:
+          type: string
+          example: application/geo+json
+        hreflang:
+          type: string
+          example: en
+        title:
+          type: string
+          example: Trierer Strasse 70, 53115 Bonn
+        length:
+          type: integer
+    landingPage:
+      required:
+      - links
+      type: object
+      properties:
+        title:
+          type: string
+          example: Buildings in Bonn
+        description:
+          type: string
+          example: Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+    confClasses:
+      required:
+      - conformsTo
+      type: object
+      properties:
+        conformsTo:
+          type: array
+          items:
+            type: string
+    queryable:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        id:
+          type: string
+          description: identifier of the attribute that can be used in CQL filters
+          example: address
+        type:
+          type: string
+          description: the property type
+          enum:
+          - string
+          - uri
+          - number
+          - integer
+          - date
+          - dateTime
+          - boolean
+          - geometry
+    collection:
+      required:
+      - id
+      - links
+      type: object
+      properties:
+        id:
+          type: string
+          description: identifier of the collection used, for example, in URIs
+          example: address
+        title:
+          type: string
+          description: human readable title of the collection
+          example: address
+        description:
+          type: string
+          description: a description of the features in the collection
+          example: An address.
+        links:
+          type: array
+          example:
+          - href: http://data.example.com/buildings
+            rel: item
+          - href: http://example.com/concepts/buildings.html
+            rel: describedBy
+            type: text/html
+          items:
+            $ref: '#/components/schemas/link'
+        extent:
+          $ref: '#/components/schemas/extent'
+        itemType:
+          type: string
+          description: indicator about the type of the items in the collection (the default value is 'feature').
+          default: feature
+        crs:
+          type: array
+          description: the list of coordinate reference systems supported by the service
+          example:
+          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+          - http://www.opengis.net/def/crs/EPSG/0/4326
+          items:
+            type: string
+            format: uri;
+          default:
+          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    extent:
+      type: object
+      properties:
+        spatial:
+          type: object
+          properties:
+            bbox:
+              minItems: 1
+              type: array
+              description: 'One or more bounding boxes that describe the spatial extent of the dataset.
+
+                In the Core only a single bounding box is supported. Extensions may support
+
+                additional areas. If multiple areas are provided, the union of the bounding
+
+                boxes describes the spatial extent.'
+              items:
+                maxItems: 6
+                minItems: 4
+                type: array
+                description: 'Each bounding box is provided as four or six numbers, depending on
+
+                  whether the coordinate reference system includes a vertical axis
+
+                  (height or depth):
+
+
+                  * Lower left corner, coordinate axis 1
+
+                  * Lower left corner, coordinate axis 2
+
+                  * Minimum value, coordinate axis 3 (optional)
+
+                  * Upper right corner, coordinate axis 1
+
+                  * Upper right corner, coordinate axis 2
+
+                  * Maximum value, coordinate axis 3 (optional)
+
+
+                  The coordinate reference system of the values is WGS 84 longitude/latitude
+
+                  (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate
+
+                  reference system is specified in `crs`.
+
+
+                  For WGS 84 longitude/latitude the values are in most cases the sequence of
+
+                  minimum longitude, minimum latitude, maximum longitude and maximum latitude.
+
+                  However, in cases where the box spans the antimeridian the first value
+
+                  (west-most box edge) is larger than the third value (east-most box edge).
+
+
+                  If the vertical axis is included, the third and the sixth number are
+
+                  the bottom and the top of the 3-dimensional bounding box.
+
+
+                  If a feature has multiple spatial geometry properties, it is the decision of the
+
+                  server whether only a single spatial geometry property is used to determine
+
+                  the extent or all relevant geometries.'
+                example:
+                - -180
+                - -90
+                - 180
+                - 90
+                items:
+                  type: number
+            crs:
+              type: string
+              description: 'Coordinate reference system of the coordinates in the spatial extent
+
+                (property `bbox`). The default reference system is WGS 84 longitude/latitude.
+
+                In the Core this is the only supported coordinate reference system.
+
+                Extensions may support additional coordinate reference systems and add
+
+                additional enum values.'
+              enum:
+              - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+              default: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+          description: The spatial extent of the features in the collection.
+        temporal:
+          type: object
+          properties:
+            interval:
+              minItems: 1
+              type: array
+              description: 'One or more time intervals that describe the temporal extent of the dataset.
+
+                The value `null` is supported and indicates an open time intervall.
+
+                In the Core only a single time interval is supported. Extensions may support
+
+                multiple intervals. If multiple intervals are provided, the union of the
+
+                intervals describes the temporal extent.'
+              items:
+                maxItems: 2
+                minItems: 2
+                type: array
+                description: 'Begin and end times of the time interval. The timestamps
+
+                  are in the coordinate reference system specified in `trs`. By default
+
+                  this is the Gregorian calendar.'
+                example:
+                - '2011-11-11T12:22:11Z'
+                - null
+                items:
+                  type:
+                  - string
+                  - 'null'
+                  format: date-time
+            trs:
+              type: string
+              description: 'Coordinate reference system of the coordinates in the temporal extent
+
+                (property `interval`). The default reference system is the Gregorian calendar.
+
+                In the Core this is the only supported temporal reference system.
+
+                Extensions may support additional temporal reference systems and add
+
+                additional enum values.'
+              enum:
+              - http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
+              default: http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
+          description: The temporal extent of the features in the collection.
+      description: 'The extent of the features in the collection. In the Core only spatial and temporal
+
+        extents are specified. Extensions may add additional members to represent other
+
+        extents, for example, thermal or pressure ranges.'
   responses:
+    Queryables:
+      description: Information about the feature collection queryable properties
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/queryables'
+    FilterCapabilities:
+      description: A document listing the server filtering capabilities
+      content:
+        application/json:
+          schema:
+            type: object
+        text/html:
+          schema:
+            type: string
+    Sortables:
+      description: Information about the feature collection sortable properties
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/sortables'
+    LandingPage:
+      description: 'The landing page provides links to the API definition
+
+        (link relations `service-desc` and `service-doc`),
+
+        the Conformance declaration (path `/conformance`,
+
+        link relation `conformance`), and the Feature
+
+        Collections (path `/collections`, link relation
+
+        `data`).'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/landingPage'
+          example:
+            title: Buildings in Bonn
+            description: Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.
+            links:
+            - href: http://data.example.org/
+              rel: self
+              type: application/json
+              title: this document
+            - href: http://data.example.org/api
+              rel: service-desc
+              type: application/vnd.oai.openapi+json;version=3.0
+              title: the API definition
+            - href: http://data.example.org/api.html
+              rel: service-doc
+              type: text/html
+              title: the API documentation
+            - href: http://data.example.org/conformance
+              rel: conformance
+              type: application/json
+              title: OGC API conformance classes implemented by this server
+            - href: http://data.example.org/collections
+              rel: data
+              type: application/json
+              title: Information about the feature collections
+        text/html:
+          schema:
+            type: string
     ConformanceDeclaration:
       description: 'The URIs of all conformance classes supported by the server.
 
@@ -225,21 +620,6 @@ components:
         text/html:
           schema:
             type: string
-    FilterCapabilities:
-      description: A document listing the server filtering capabilities
-      content:
-        application/json:
-          schema:
-            type: object
-        text/html:
-          schema:
-            type: string
-    Sortables:
-      description: Information about the feature collection sortable properties
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/sortables'
     Collections:
       description: 'The feature collections shared by this API.
 
@@ -386,66 +766,9 @@ components:
         text/html:
           schema:
             type: string
-    LandingPage:
-      description: 'The landing page provides links to the API definition
-
-        (link relations `service-desc` and `service-doc`),
-
-        the Conformance declaration (path `/conformance`,
-
-        link relation `conformance`), and the Feature
-
-        Collections (path `/collections`, link relation
-
-        `data`).'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/landingPage'
-          example:
-            title: Buildings in Bonn
-            description: Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.
-            links:
-            - href: http://data.example.org/
-              rel: self
-              type: application/json
-              title: this document
-            - href: http://data.example.org/api
-              rel: service-desc
-              type: application/vnd.oai.openapi+json;version=3.0
-              title: the API definition
-            - href: http://data.example.org/api.html
-              rel: service-doc
-              type: text/html
-              title: the API documentation
-            - href: http://data.example.org/conformance
-              rel: conformance
-              type: application/json
-              title: OGC API conformance classes implemented by this server
-            - href: http://data.example.org/collections
-              rel: data
-              type: application/json
-              title: Information about the feature collections
-        text/html:
-          schema:
-            type: string
     NotFound:
       description: The requested URI was not found.
-    Queryables:
-      description: Information about the feature collection queryable properties
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/queryables'
   parameters:
-    otherParameters:
-      name: otherParameters
-      in: query
-      description: Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)
-      style: form
-      schema:
-        type: object
-        additionalProperties: true
     collectionId:
       name: collectionId
       in: path
@@ -526,337 +849,14 @@ components:
         - WSF_2015
         - WSF_2019
         - WSF_Evolution
-  schemas:
-    sortables:
-      required:
-      - queryables
-      type: object
-      properties:
-        queryables:
-          type: array
-          description: list of queryable properties
-          items:
-            $ref: '#/components/schemas/sortable'
-    queryable:
-      required:
-      - name
-      - type
-      type: object
-      properties:
-        id:
-          type: string
-          description: identifier of the attribute that can be used in CQL filters
-          example: address
-        type:
-          type: string
-          description: the property type
-          enum:
-          - string
-          - uri
-          - number
-          - integer
-          - date
-          - dateTime
-          - boolean
-          - geometry
-    collection:
-      required:
-      - id
-      - links
-      type: object
-      properties:
-        id:
-          type: string
-          description: identifier of the collection used, for example, in URIs
-          example: address
-        title:
-          type: string
-          description: human readable title of the collection
-          example: address
-        description:
-          type: string
-          description: a description of the features in the collection
-          example: An address.
-        links:
-          type: array
-          example:
-          - href: http://data.example.com/buildings
-            rel: item
-          - href: http://example.com/concepts/buildings.html
-            rel: describedBy
-            type: text/html
-          items:
-            $ref: '#/components/schemas/link'
-        extent:
-          $ref: '#/components/schemas/extent'
-        itemType:
-          type: string
-          description: indicator about the type of the items in the collection (the default value is 'feature').
-          default: feature
-        crs:
-          type: array
-          description: the list of coordinate reference systems supported by the service
-          example:
-          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-          - http://www.opengis.net/def/crs/EPSG/0/4326
-          items:
-            type: string
-            format: uri;
-          default:
-          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-    landingPage:
-      required:
-      - links
-      type: object
-      properties:
-        title:
-          type: string
-          example: Buildings in Bonn
-        description:
-          type: string
-          example: Access to data about buildings in the city of Bonn via a Web API that conforms to the OGC API Features specification.
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-    extent:
-      type: object
-      properties:
-        spatial:
-          type: object
-          properties:
-            bbox:
-              minItems: 1
-              type: array
-              description: 'One or more bounding boxes that describe the spatial extent of the dataset.
-
-                In the Core only a single bounding box is supported. Extensions may support
-
-                additional areas. If multiple areas are provided, the union of the bounding
-
-                boxes describes the spatial extent.'
-              items:
-                maxItems: 6
-                minItems: 4
-                type: array
-                description: 'Each bounding box is provided as four or six numbers, depending on
-
-                  whether the coordinate reference system includes a vertical axis
-
-                  (height or depth):
-
-
-                  * Lower left corner, coordinate axis 1
-
-                  * Lower left corner, coordinate axis 2
-
-                  * Minimum value, coordinate axis 3 (optional)
-
-                  * Upper right corner, coordinate axis 1
-
-                  * Upper right corner, coordinate axis 2
-
-                  * Maximum value, coordinate axis 3 (optional)
-
-
-                  The coordinate reference system of the values is WGS 84 longitude/latitude
-
-                  (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate
-
-                  reference system is specified in `crs`.
-
-
-                  For WGS 84 longitude/latitude the values are in most cases the sequence of
-
-                  minimum longitude, minimum latitude, maximum longitude and maximum latitude.
-
-                  However, in cases where the box spans the antimeridian the first value
-
-                  (west-most box edge) is larger than the third value (east-most box edge).
-
-
-                  If the vertical axis is included, the third and the sixth number are
-
-                  the bottom and the top of the 3-dimensional bounding box.
-
-
-                  If a feature has multiple spatial geometry properties, it is the decision of the
-
-                  server whether only a single spatial geometry property is used to determine
-
-                  the extent or all relevant geometries.'
-                example:
-                - -180
-                - -90
-                - 180
-                - 90
-                items:
-                  type: number
-            crs:
-              type: string
-              description: 'Coordinate reference system of the coordinates in the spatial extent
-
-                (property `bbox`). The default reference system is WGS 84 longitude/latitude.
-
-                In the Core this is the only supported coordinate reference system.
-
-                Extensions may support additional coordinate reference systems and add
-
-                additional enum values.'
-              enum:
-              - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-              default: http://www.opengis.net/def/crs/OGC/1.3/CRS84
-          description: The spatial extent of the features in the collection.
-        temporal:
-          type: object
-          properties:
-            interval:
-              minItems: 1
-              type: array
-              description: 'One or more time intervals that describe the temporal extent of the dataset.
-
-                The value `null` is supported and indicates an open time intervall.
-
-                In the Core only a single time interval is supported. Extensions may support
-
-                multiple intervals. If multiple intervals are provided, the union of the
-
-                intervals describes the temporal extent.'
-              items:
-                maxItems: 2
-                minItems: 2
-                type: array
-                description: 'Begin and end times of the time interval. The timestamps
-
-                  are in the coordinate reference system specified in `trs`. By default
-
-                  this is the Gregorian calendar.'
-                example:
-                - '2011-11-11T12:22:11Z'
-                - null
-                items:
-                  type:
-                  - string
-                  - 'null'
-                  format: date-time
-            trs:
-              type: string
-              description: 'Coordinate reference system of the coordinates in the temporal extent
-
-                (property `interval`). The default reference system is the Gregorian calendar.
-
-                In the Core this is the only supported temporal reference system.
-
-                Extensions may support additional temporal reference systems and add
-
-                additional enum values.'
-              enum:
-              - http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
-              default: http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
-          description: The temporal extent of the features in the collection.
-      description: 'The extent of the features in the collection. In the Core only spatial and temporal
-
-        extents are specified. Extensions may add additional members to represent other
-
-        extents, for example, thermal or pressure ranges.'
-    exception:
-      required:
-      - code
-      type: object
-      properties:
-        code:
-          type: string
-        description:
-          type: string
-      description: 'Information about the exception: an error code plus an optional description.'
-    queryables:
-      required:
-      - queryables
-      type: object
-      properties:
-        queryables:
-          type: array
-          description: list of queryable properties
-          items:
-            $ref: '#/components/schemas/queryable'
-    confClasses:
-      required:
-      - conformsTo
-      type: object
-      properties:
-        conformsTo:
-          type: array
-          items:
-            type: string
-    collections:
-      required:
-      - collections
-      - links
-      type: object
-      properties:
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-        collections:
-          type: array
-          items:
-            $ref: '#/components/schemas/collection'
-        crs:
-          type: array
-          description: a list of CRS identifiers that are supported for more that one feature collection offered by the service
-          example:
-          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-          - http://www.opengis.net/def/crs/EPSG/0/4326
-          items:
-            type: string
-            format: uri
-          default:
-          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-    sortable:
-      required:
-      - name
-      - type
-      type: object
-      properties:
-        id:
-          type: string
-          description: identifier of the attribute that can be used in sortby
-          example: address
-        type:
-          type: string
-          description: the property type
-          enum:
-          - string
-          - uri
-          - number
-          - integer
-          - date
-          - dateTime
-          - boolean
-          - geometry
-    link:
-      required:
-      - href
-      type: object
-      properties:
-        href:
-          type: string
-          example: http://data.example.com/buildings/123
-        rel:
-          type: string
-          example: alternate
-        type:
-          type: string
-          example: application/geo+json
-        hreflang:
-          type: string
-          example: en
-        title:
-          type: string
-          example: Trierer Strasse 70, 53115 Bonn
-        length:
-          type: integer
+    otherParameters:
+      name: otherParameters
+      in: query
+      description: Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)
+      style: form
+      schema:
+        type: object
+        additionalProperties: true
 externalDocs:
   description: STAC API specification
   url: https://github.com/radiantearth/stac-api-spec
