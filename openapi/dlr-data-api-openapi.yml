@@ -122,38 +122,6 @@ components:
                 type: array
                 items:
                   type: number
-    pointGeoJSON:
-      required:
-      - coordinates
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Point
-        coordinates:
-          minItems: 2
-          type: array
-          items:
-            type: number
-    multipointGeoJSON:
-      required:
-      - coordinates
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiPoint
-        coordinates:
-          type: array
-          items:
-            minItems: 2
-            type: array
-            items:
-              type: number
     exception:
       required:
       - code
@@ -164,27 +132,7 @@ components:
         description:
           type: string
       description: 'Information about the exception: an error code plus an optional description.'
-    timeStamp:
-      type: string
-      description: This property indicates the time and date when the response was generated.
-      format: date-time
-    numberMatched:
-      minimum: 0
-      type: integer
-      description: 'The number of features of the feature type that match the selection
-
-        parameters like `bbox`.'
-      example: 127
-    geometryGeoJSON:
-      oneOf:
-      - $ref: '#/components/schemas/pointGeoJSON'
-      - $ref: '#/components/schemas/multipointGeoJSON'
-      - $ref: '#/components/schemas/linestringGeoJSON'
-      - $ref: '#/components/schemas/multilinestringGeoJSON'
-      - $ref: '#/components/schemas/polygonGeoJSON'
-      - $ref: '#/components/schemas/multipolygonGeoJSON'
-      - $ref: '#/components/schemas/geometrycollectionGeoJSON'
-    polygonGeoJSON:
+    linestringGeoJSON:
       required:
       - coordinates
       - type
@@ -193,17 +141,15 @@ components:
         type:
           type: string
           enum:
-          - Polygon
+          - LineString
         coordinates:
+          minItems: 2
           type: array
           items:
-            minItems: 4
+            minItems: 2
             type: array
             items:
-              minItems: 2
-              type: array
-              items:
-                type: number
+              type: number
     featureGeoJSON:
       required:
       - geometry
@@ -229,6 +175,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/link'
+    multipointGeoJSON:
+      required:
+      - coordinates
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPoint
+        coordinates:
+          type: array
+          items:
+            minItems: 2
+            type: array
+            items:
+              type: number
     numberReturned:
       minimum: 0
       type: integer
@@ -244,6 +207,102 @@ components:
 
         of items in the "features" array.'
       example: 10
+    link:
+      required:
+      - href
+      type: object
+      properties:
+        href:
+          type: string
+          example: http://data.example.com/buildings/123
+        rel:
+          type: string
+          example: alternate
+        type:
+          type: string
+          example: application/geo+json
+        hreflang:
+          type: string
+          example: en
+        title:
+          type: string
+          example: Trierer Strasse 70, 53115 Bonn
+        length:
+          type: integer
+    geometryGeoJSON:
+      oneOf:
+      - $ref: '#/components/schemas/pointGeoJSON'
+      - $ref: '#/components/schemas/multipointGeoJSON'
+      - $ref: '#/components/schemas/linestringGeoJSON'
+      - $ref: '#/components/schemas/multilinestringGeoJSON'
+      - $ref: '#/components/schemas/polygonGeoJSON'
+      - $ref: '#/components/schemas/multipolygonGeoJSON'
+      - $ref: '#/components/schemas/geometrycollectionGeoJSON'
+    timeStamp:
+      type: string
+      description: This property indicates the time and date when the response was generated.
+      format: date-time
+    geometrycollectionGeoJSON:
+      required:
+      - geometries
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - GeometryCollection
+        geometries:
+          type: array
+          items:
+            $ref: '#/components/schemas/geometryGeoJSON'
+    multilinestringGeoJSON:
+      required:
+      - coordinates
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiLineString
+        coordinates:
+          type: array
+          items:
+            minItems: 2
+            type: array
+            items:
+              minItems: 2
+              type: array
+              items:
+                type: number
+    polygonGeoJSON:
+      required:
+      - coordinates
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+        coordinates:
+          type: array
+          items:
+            minItems: 4
+            type: array
+            items:
+              minItems: 2
+              type: array
+              items:
+                type: number
+    numberMatched:
+      minimum: 0
+      type: integer
+      description: 'The number of features of the feature type that match the selection
+
+        parameters like `bbox`.'
+      example: 127
     featureCollectionGeoJSON:
       required:
       - features
@@ -268,7 +327,7 @@ components:
           $ref: '#/components/schemas/numberMatched'
         numberReturned:
           $ref: '#/components/schemas/numberReturned'
-    multilinestringGeoJSON:
+    pointGeoJSON:
       required:
       - coordinates
       - type
@@ -277,121 +336,15 @@ components:
         type:
           type: string
           enum:
-          - MultiLineString
-        coordinates:
-          type: array
-          items:
-            minItems: 2
-            type: array
-            items:
-              minItems: 2
-              type: array
-              items:
-                type: number
-    link:
-      required:
-      - href
-      type: object
-      properties:
-        href:
-          type: string
-          example: http://data.example.com/buildings/123
-        rel:
-          type: string
-          example: alternate
-        type:
-          type: string
-          example: application/geo+json
-        hreflang:
-          type: string
-          example: en
-        title:
-          type: string
-          example: Trierer Strasse 70, 53115 Bonn
-        length:
-          type: integer
-    linestringGeoJSON:
-      required:
-      - coordinates
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - LineString
+          - Point
         coordinates:
           minItems: 2
           type: array
           items:
-            minItems: 2
-            type: array
-            items:
-              type: number
-    geometrycollectionGeoJSON:
-      required:
-      - geometries
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - GeometryCollection
-        geometries:
-          type: array
-          items:
-            $ref: '#/components/schemas/geometryGeoJSON'
+            type: number
   responses:
-    Feature:
-      description: 'fetch the feature with id `featureId` in the feature collection
-
-        with id `collectionId`'
-      content:
-        application/geo+json:
-          schema:
-            $ref: '#/components/schemas/featureGeoJSON'
-          example:
-            type: Feature
-            links:
-            - href: http://data.example.com/id/building/123
-              rel: canonical
-              title: canonical URI of the building
-            - href: http://data.example.com/collections/buildings/items/123.json
-              rel: self
-              type: application/geo+json
-              title: this document
-            - href: http://data.example.com/collections/buildings/items/123.html
-              rel: alternate
-              type: text/html
-              title: this document as HTML
-            - href: http://data.example.com/collections/buildings
-              rel: collection
-              type: application/geo+json
-              title: the collection document
-            id: '123'
-            geometry:
-              type: Polygon
-              coordinates:
-              - '...'
-            properties:
-              function: residential
-              floors: '2'
-              lastUpdate: '2015-08-01T12:34:56Z'
-        text/html:
-          schema:
-            type: string
     InvalidParameter:
       description: A query parameter has an invalid value.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/exception'
-        text/html:
-          schema:
-            type: string
-    ServerError:
-      description: A server error occurred.
       content:
         application/json:
           schema:
@@ -483,17 +436,82 @@ components:
             type: string
     NotFound:
       description: The requested URI was not found.
+    ServerError:
+      description: A server error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exception'
+        text/html:
+          schema:
+            type: string
+    Feature:
+      description: 'fetch the feature with id `featureId` in the feature collection
+
+        with id `collectionId`'
+      content:
+        application/geo+json:
+          schema:
+            $ref: '#/components/schemas/featureGeoJSON'
+          example:
+            type: Feature
+            links:
+            - href: http://data.example.com/id/building/123
+              rel: canonical
+              title: canonical URI of the building
+            - href: http://data.example.com/collections/buildings/items/123.json
+              rel: self
+              type: application/geo+json
+              title: this document
+            - href: http://data.example.com/collections/buildings/items/123.html
+              rel: alternate
+              type: text/html
+              title: this document as HTML
+            - href: http://data.example.com/collections/buildings
+              rel: collection
+              type: application/geo+json
+              title: the collection document
+            id: '123'
+            geometry:
+              type: Polygon
+              coordinates:
+              - '...'
+            properties:
+              function: residential
+              floors: '2'
+              lastUpdate: '2015-08-01T12:34:56Z'
+        text/html:
+          schema:
+            type: string
   parameters:
-    filter-lang:
-      name: filter-lang
+    sortby:
+      name: sortby
       in: query
-      description: Filter encoding used in the filter parameter
+      required: false
+      style: form
+      explode: false
+      schema:
+        minItems: 1
+        type: array
+        items:
+          pattern: '[+|-][A-Za-z_][A-Za-z_0-9]*'
+          type: string
+    bbox-crs:
+      name: bbox-crs
+      in: query
+      required: false
+      style: form
+      explode: false
       schema:
         type: string
-        enum:
-        - cql-text
-        - cql-json
-        default: cql-text
+        format: uri
+    featureId:
+      name: featureId
+      in: path
+      description: local identifier of a feature
+      required: true
+      schema:
+        type: string
     limit:
       name: limit
       in: query
@@ -514,11 +532,27 @@ components:
         minimum: 1
         type: integer
         default: 20
-    featureId:
-      name: featureId
-      in: path
-      description: local identifier of a feature
-      required: true
+    crs:
+      name: crs
+      in: query
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        format: uri
+    otherParameters:
+      name: otherParameters
+      in: query
+      description: Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)
+      style: form
+      schema:
+        type: object
+        additionalProperties: true
+    filter:
+      name: filter
+      in: query
+      description: Defines a filter that will be applied on items, only items matching the filter will be returned
       schema:
         type: string
     datetime:
@@ -634,38 +668,6 @@ components:
         - WSF_2015
         - WSF_2019
         - WSF_Evolution
-    crs:
-      name: crs
-      in: query
-      required: false
-      style: form
-      explode: false
-      schema:
-        type: string
-        format: uri
-    otherParameters:
-      name: otherParameters
-      in: query
-      description: Allows unrecognized parameters to be added in the query string without getting a 400 back (e.g., cache busters)
-      style: form
-      schema:
-        type: object
-        additionalProperties: true
-    bbox-crs:
-      name: bbox-crs
-      in: query
-      required: false
-      style: form
-      explode: false
-      schema:
-        type: string
-        format: uri
-    filter:
-      name: filter
-      in: query
-      description: Defines a filter that will be applied on items, only items matching the filter will be returned
-      schema:
-        type: string
     bbox:
       name: bbox
       in: query
@@ -724,18 +726,16 @@ components:
         type: array
         items:
           type: number
-    sortby:
-      name: sortby
+    filter-lang:
+      name: filter-lang
       in: query
-      required: false
-      style: form
-      explode: false
+      description: Filter encoding used in the filter parameter
       schema:
-        minItems: 1
-        type: array
-        items:
-          pattern: '[+|-][A-Za-z_][A-Za-z_0-9]*'
-          type: string
+        type: string
+        enum:
+        - cql-text
+        - cql-json
+        default: cql-text
 externalDocs:
   description: STAC API specification
   url: https://github.com/radiantearth/stac-api-spec
