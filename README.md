@@ -1,4 +1,4 @@
-# DLR - German Aerospace Center
+# DLR
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,43 +64,152 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The German Aerospace Center (DLR) Earth Observation Center (EOC) provides public APIs for accessing Earth observation satellite data, remote sensing products, and scientific datasets from German aerospace research missions.
+The German Aerospace Center (DLR) Earth Observation Center (EOC) provides public APIs for accessing Earth observation satellite data, remote sensing products, and scientific datasets from German aerospace research missions. Services include OGC-compliant WMS, WCS, CSW, STAC, and WMTS endpoints covering atmospheric trace gases, digital elevation models, land cover, hyperspectral imagery, water resources, and more from missions such as TanDEM-X, TerraSAR-X, EnMAP, DESIS, and Sentinel series.
 
-## APIs
+**Areas:** Earth Observation · Remote Sensing · Satellite Data · Geospatial · Aerospace · Open Data · OGC · STAC · Atmospheric Science · Digital Elevation Models
 
-The EOC Geoservice provides OGC-compliant discovery, visualization, and direct download services for geospatial data hosted by the German Satellite Data Archive (D-SDA). Services include:
+## DLR on APIs.io
 
-- **STAC API** - SpatioTemporal Asset Catalog with 80+ Earth observation collections
-- **WMS (Imagery)** - Web Map Service for satellite imagery visualization
-- **WCS (Imagery)** - Web Coverage Service for data extraction and download
-- **WMS (Basemap)** - Basemap and reference data visualization including SRTM DEM
-- **WCS (Basemap)** - Coverage download for basemap datasets
-- **WMS (Land)** - Land cover and land use layers (WSF, crop types, forest)
-- **WMS (Atmosphere)** - Atmospheric products (Sentinel-5P TROPOMI trace gases)
-- **EOWEB GeoPortal** - Multi-mission data portal for browsing and ordering EO data
+Everything profiled for DLR is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/dlr/](https://apis.io/providers/dlr/)** — or go straight to one of the APIs or properties below.
 
-## Data Coverage
+### APIs (10)
 
-- TanDEM-X global digital elevation models (90m resolution)
-- Sentinel-2 multispectral imagery with atmospheric corrections
-- Sentinel-5P TROPOMI atmospheric trace gas products
-- EnMAP hyperspectral satellite imagery
-- DESIS hyperspectral data from the ISS
-- World Settlement Footprint global urban mapping
-- MODIS-based Global Water Pack (daily/monthly/yearly)
-- Forest structure and canopy data for Germany
-- CORINE land cover data for Europe
+- [EOC Imagery Web Map Service (WMS)](https://apis.io/apis/dlr/eoc-imagery-web-map-service-wms/) — OGC Web Map Service providing visualization layers for DLR Earth observation imagery products including optical satellite data, hyperspectral imagery, and…
+- [EOC Imagery Web Coverage Service (WCS)](https://apis.io/apis/dlr/eoc-imagery-web-coverage-service-wcs/) — OGC Web Coverage Service providing direct download and extraction of coverage data for DLR Earth observation imagery products, supporting data subsetting…
+- [EOC Basemap Web Map Service (WMS)](https://apis.io/apis/dlr/eoc-basemap-web-map-service-wms/) — OGC Web Map Service providing basemap and core geospatial reference layers from DLR including global mosaics and topographic reference data derived from DLR…
+- [EOC Basemap Web Coverage Service (WCS)](https://apis.io/apis/dlr/eoc-basemap-web-coverage-service-wcs/) — OGC Web Coverage Service for DLR basemap and reference datasets including the SRTM X-SAR global digital elevation model mosaic, providing programmatic…
+- [EOC Land Web Map Service (WMS)](https://apis.io/apis/dlr/eoc-land-web-map-service-wms/) — OGC Web Map Service providing land cover and land use visualization layers from DLR research, including World Settlement Footprint, crop type mapping,…
+- [EOC Atmosphere Web Map Service (WMS)](https://apis.io/apis/dlr/eoc-atmosphere-web-map-service-wms/) — OGC Web Map Service providing atmospheric data visualization layers from DLR including Sentinel-5P TROPOMI products for ozone, nitrogen dioxide, sulfur…
+- [EOWEB GeoPortal API](https://apis.io/apis/dlr/eoweb-geoportal-api/) — Multi-mission web portal API for interactive access to the DLR Earth observation data holdings including browse-and-download features, time-series data…
+- [DLR Capabilities API](https://apis.io/apis/dlr/dlr-capabilities-api/) — essential characteristics of this API
+- [DLR Data API](https://apis.io/apis/dlr/dlr-data-api/) — access to data (features)
+- [DLR STAC API](https://apis.io/apis/dlr/dlr-stac-api/) — The STAC API from DLR — 1 operation(s) for stac.
 
-## Access
+### Published properties
 
-All EOC Geoservice APIs are free and publicly accessible without registration. The EOWEB GeoPortal offers guest browsing and free registered user access for dataset ordering. Scientific access to TanDEM-X and TerraSAR-X data is available through a proposal-based process.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Links
+#### Agentic access (1)
 
-- Portal: https://geoservice.dlr.de/web/
-- STAC API: https://geoservice.dlr.de/eoc/ogc/stac/v1/
-- EOWEB GeoPortal: https://eoweb.dlr.de/egp/
-- Data Assets Catalog: https://geoservice.dlr.de/data-assets/
-- Data Access Information: https://www.dlr.de/en/eoc/research-transfer/topics/satellite-data/data-access
-- GitHub: https://github.com/dlr-eoc
-- Contact: geoservice@dlr.de
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Dlr Agentic Access](https://apis.io/agentic-access/dlr/dlr-agentic-access/)
+
+#### JSON Schema (1)
+
+The data models the API reads and writes.
+
+- [DLR EOC STAC API Schema](https://apis.io/schemas/dlr/eoc-stac-api/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Eoc Stac Api Context](https://apis.io/jsonld/dlr/eoc-stac-api/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Stac Collection Response](https://apis.io/examples/dlr/stac-collection-response/)
+- [Stac Search Request](https://apis.io/examples/dlr/stac-search-request/)
+
+#### Collections (3)
+
+Postman and Open Collection request collections.
+
+- [EOC EO Products Service Capabilities API](https://apis.io/collections/dlr/open-dlr-capabilities-api/)
+- [EOC EO Products Service Capabilities Data API](https://apis.io/collections/dlr/open-dlr-data-api/)
+- [EOC EO Products Service Capabilities STAC API](https://apis.io/collections/dlr/open-dlr-stac-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [DLR — jsonschema rules](https://apis.io/rules/dlr/dlr-jsonschema-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Dlr Domain Security](https://apis.io/security/dlr/dlr-domain-security/)
+- [Dlr Vulnerability Disclosure](https://apis.io/security/dlr/dlr-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/dlr/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/dlr/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/dlr/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.dlr.de/)
+- [Terms of service](https://eoweb.dlr.de/egp/resources/context/Login)
+- [Privacy policy](https://www.dlr.de/en/privacy-policy)
+
+## API Evangelist rating
+
+**Kin Score 33.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 55.9 |
+| Contract governance | 9.8 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 31.6 |
+
+**Agent readiness 17.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 18.1** — Government & Public Sector
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/dlr/](https://apis.io/providers/dlr/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for DLR: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/dlr/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
